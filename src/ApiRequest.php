@@ -13,10 +13,10 @@ class ApiRequest
         $this->_config = $config;
     }
 
-    public function send(): string
+    public function send(): ApiResponse
     {
         $httpClient = new NativeHttpClient();
         $response = $httpClient->request('POST', $this->_config->getApiUrl());
-        return $response->getContent();
+        return new ApiResponse($response->getContent());
     }
 }

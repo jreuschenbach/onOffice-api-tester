@@ -3,6 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use jr\ooapi\Config;
 use jr\ooapi\ApiRequest;
+use jr\ooapi\ApiResponse;
 
 class ApiRequestTest extends TestCase
 {
@@ -14,9 +15,10 @@ class ApiRequestTest extends TestCase
 
     public function testRequest(): void
     {
-        $apiDefaultAnswer = '{"status":{"code":500,"errorcode":"Syntax error","message":"Unknown error occured"},"response":{"results":[]}}';
         $config = new Config('config/ooapi.ini');
         $apiRequest = new ApiRequest($config);
-        $this->assertEquals($apiDefaultAnswer, $apiRequest->send());
+        $apiResponse = $apiRequest->send();
+        $this->assertInstanceOf(ApiResponse::class, $apiResponse);
+        $this->assertEquals(500, $apiResponse->getCode());
     }
 }
