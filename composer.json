@@ -10,7 +10,8 @@
     }
   ],
   "require": {
-    "symfony/http-client": "^5"
+    "symfony/http-client": "^5",
+    "ext-json": "*"
   },
   "require-dev": {
     "phpunit/phpunit": "^9"
