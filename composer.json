@@ -10,6 +10,7 @@
     }
   ],
   "require": {
+    "symfony/http-client": "^5"
   },
   "require-dev": {
     "phpunit/phpunit": "^9"
