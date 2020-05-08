@@ -13,6 +13,8 @@ class ConfigTest extends TestCase
     public function testGetApiUrl(): void
     {
         $pConfig = new Config('config/ooapi.ini');
-        $this->assertEquals('https://api.onoffice.de/api/latest/api.php', $pConfig->getApiUrl());
+        $this->assertIsString($pConfig->getApiUrl());
+        $this->assertStringStartsWith('https://api.onoffice.de/api', $pConfig->getApiUrl());
+        $this->assertIsString($pConfig->getCredentialDir());
     }
 }
