@@ -4,6 +4,7 @@ use PHPUnit\Framework\TestCase;
 use jr\ooapi\CredentialStorage;
 use jr\ooapi\dataObjects\Credentials;
 use jr\ooapi\Config;
+use jr\ooapi\EncrypterOpenSSL;
 
 class CredentialStorageTest extends TestCase
 {
@@ -18,10 +19,14 @@ class CredentialStorageTest extends TestCase
         $baseDir = $config->getCredentialDir();
         $credentials = $this->createCredentials();
         $storage = new CredentialStorage($baseDir);
+        $storage->activateEncryption(new EncrypterOpenSSL());
         $storage->save($credentials);
 
+        $fileContentEncrypted = file_get_contents($baseDir.'/ooapi_credentials');
+
         $this->assertFileExists($baseDir.'/ooapi_credentials');
-        $this->assertEquals('testToken:testSecret', file_get_contents($baseDir.'/ooapi_credentials'));
+        $this->assertStringNotContainsString('testToken', $fileContentEncrypted);
+        $this->assertStringNotContainsString('testSecret', $fileContentEncrypted);
     }
 
     public function testLoad()
