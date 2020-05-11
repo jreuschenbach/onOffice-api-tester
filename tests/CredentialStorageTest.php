@@ -8,6 +8,8 @@ use jr\ooapi\EncrypterOpenSSL;
 
 class CredentialStorageTest extends TestCase
 {
+    const PASSWORD = 'test';
+
     public function testInstance()
     {
         $this->assertInstanceOf(CredentialStorage::class, new CredentialStorage(''));
@@ -19,7 +21,7 @@ class CredentialStorageTest extends TestCase
         $baseDir = $config->getCredentialDir();
         $credentials = $this->createCredentials();
         $storage = new CredentialStorage($baseDir);
-        $storage->activateEncryption(new EncrypterOpenSSL());
+        $storage->activateEncryption(new EncrypterOpenSSL(self::PASSWORD));
         $storage->save($credentials);
 
         $fileContentEncrypted = file_get_contents($baseDir.'/ooapi_credentials');
@@ -35,6 +37,7 @@ class CredentialStorageTest extends TestCase
         $baseDir = $config->getCredentialDir();
         $credentials = $this->createCredentials();
         $storage = new CredentialStorage($baseDir);
+        $storage->activateEncryption(new EncrypterOpenSSL(self::PASSWORD));
         $storage->save($credentials);
         $credentials = $storage->load();
 
