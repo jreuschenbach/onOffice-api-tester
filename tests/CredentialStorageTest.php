@@ -10,6 +10,27 @@ class CredentialStorageTest extends TestCase
 {
     const PASSWORD = 'test';
 
+    /** @var string */
+    private $_testDir = '';
+
+    protected function setUp(): void
+    {
+        $config = new Config('config/ooapi.ini');
+        $this->_testDir = $config->getCredentialDir().'/test-ooapi-'.rand(0, 1000000000);
+
+        mkdir($this->_testDir);
+    }
+
+    protected function tearDown(): void
+    {
+        if (file_exists($this->_testDir.'/ooapi_credentials'))
+        {
+            unlink($this->_testDir.'/ooapi_credentials');
+        }
+
+        rmdir($this->_testDir);
+    }
+
     public function testInstance()
     {
         $this->assertInstanceOf(CredentialStorage::class, new CredentialStorage(''));
@@ -17,26 +38,22 @@ class CredentialStorageTest extends TestCase
 
     public function testSave()
     {
-        $config = new Config('config/ooapi.ini');
-        $baseDir = $config->getCredentialDir();
         $credentials = $this->createCredentials();
-        $storage = new CredentialStorage($baseDir);
+        $storage = new CredentialStorage($this->_testDir);
         $storage->activateEncryption(new EncrypterOpenSSL(self::PASSWORD));
         $storage->save($credentials);
 
-        $fileContentEncrypted = file_get_contents($baseDir.'/ooapi_credentials');
+        $fileContentEncrypted = file_get_contents($this->_testDir);
 
-        $this->assertFileExists($baseDir.'/ooapi_credentials');
+        $this->assertFileExists($this->_testDir.'/ooapi_credentials');
         $this->assertStringNotContainsString('testToken', $fileContentEncrypted);
         $this->assertStringNotContainsString('testSecret', $fileContentEncrypted);
     }
 
     public function testLoad()
     {
-        $config = new Config('config/ooapi.ini');
-        $baseDir = $config->getCredentialDir();
         $credentials = $this->createCredentials();
-        $storage = new CredentialStorage($baseDir);
+        $storage = new CredentialStorage($this->_testDir);
         $storage->activateEncryption(new EncrypterOpenSSL(self::PASSWORD));
         $storage->save($credentials);
         $credentials = $storage->load();
