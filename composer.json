@@ -11,6 +11,7 @@
   ],
   "require": {
     "symfony/http-client": "^5",
+    "onoffice/sdk": "^0.2.0",
     "ext-json": "*",
     "ext-openssl": "*"
   },
