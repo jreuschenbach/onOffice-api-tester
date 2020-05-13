@@ -58,8 +58,8 @@ class CredentialStorageTest extends TestCase
         $storage->save($credentials);
         $credentials = $storage->load();
 
-        $this->assertEquals('testToken', $credentials->token);
-        $this->assertEquals('testSecret', $credentials->secret);
+        $this->assertEquals('testToken', $credentials->getToken());
+        $this->assertEquals('testSecret', $credentials->getSecret());
     }
 
     private function createCredentials()

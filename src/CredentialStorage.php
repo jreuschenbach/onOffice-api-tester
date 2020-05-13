@@ -11,19 +11,19 @@ class CredentialStorage
     const SEPARATOR = ':';
 
     /** @var string */
-    private $_baseDir = '';
+    private $baseDir = '';
 
     /** @var Encrypter */
-    private $_encrypter = null;
+    private $encrypter = null;
 
     public function __construct($baseDir)
     {
-        $this->_baseDir = $baseDir;
+        $this->baseDir = $baseDir;
     }
 
     public function save(Credentials $credentials): void
     {
-        $content = $credentials->token.self::SEPARATOR.$credentials->secret;
+        $content = $credentials->getToken().self::SEPARATOR.$credentials->getSecret();
         $this->writeFile($content);
 
     }
@@ -38,7 +38,7 @@ class CredentialStorage
 
     public function activateEncryption(Encrypter $encrypter): void
     {
-        $this->_encrypter = $encrypter;
+        $this->encrypter = $encrypter;
     }
 
     private function writeFile($credentialString): void
@@ -47,19 +47,19 @@ class CredentialStorage
 
         if ($this->isEncryptionEnabled())
         {
-            $fileContent = $this->_encrypter->encrypt($fileContent);
+            $fileContent = $this->encrypter->encrypt($fileContent);
         }
 
-        file_put_contents($this->_baseDir.'/ooapi_credentials', $fileContent);
+        file_put_contents($this->baseDir.'/ooapi_credentials', $fileContent);
     }
 
     private function loadFile(): string
     {
-        $fileContent = file_get_contents($this->_baseDir.'/ooapi_credentials');
+        $fileContent = file_get_contents($this->baseDir.'/ooapi_credentials');
 
         if ($this->isEncryptionEnabled())
         {
-            $fileContent = $this->_encrypter->decrypt($fileContent);
+            $fileContent = $this->encrypter->decrypt($fileContent);
         }
 
         return $fileContent;
@@ -67,6 +67,6 @@ class CredentialStorage
 
     private function isEncryptionEnabled(): bool
     {
-        return $this->_encrypter instanceof Encrypter;
+        return $this->encrypter instanceof Encrypter;
     }
 }
