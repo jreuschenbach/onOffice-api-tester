@@ -29,9 +29,9 @@ class ApiRequestJsonTest extends TestCase
         $this->assertStringContainsString('"token":"token"', $json);
         $this->assertStringContainsString('"request":', $json);
         $this->assertStringContainsString('"actions":', $json);
-        $this->assertStringContainsString('"actionId":"read"', $json);
-        $this->assertStringContainsString('"resourceId":"1"', $json);
-        $this->assertStringContainsString('"resourceType":"address"', $json);
+        $this->assertStringContainsString('"actionid":"read"', $json);
+        $this->assertStringContainsString('"resourceid":"1"', $json);
+        $this->assertStringContainsString('"resourcetype":"address"', $json);
         $this->assertStringContainsString('"identifier":"identifier"', $json);
         $this->assertStringContainsString('"timestamp":0', $json);
         $this->assertStringContainsString('"hmac":"hmac-test', $json);

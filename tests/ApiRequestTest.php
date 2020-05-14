@@ -28,6 +28,6 @@ class ApiRequestTest extends TestCase
 
         $apiResponse = $apiRequest->send($requestValues);
         $this->assertInstanceOf(ApiResponse::class, $apiResponse);
-        $this->assertEquals(500, $apiResponse->getCode());
+        $this->assertEquals(400, $apiResponse->getCode());
     }
 }

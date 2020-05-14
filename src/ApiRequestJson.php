@@ -24,9 +24,9 @@ class ApiRequestJson
     private function buildAction(RequestValues $requestValues, string $hmac): \stdClass
     {
         $action = new \stdClass();
-        $action->actionId = $requestValues->getAction()->getId();
-        $action->resourceId = $requestValues->getResource()->getId();
-        $action->resourceType = $requestValues->getResource()->getType();
+        $action->actionid = $requestValues->getAction()->getId();
+        $action->resourceid = $requestValues->getResource()->getId();
+        $action->resourcetype = $requestValues->getResource()->getType();
         $action->identifier = $requestValues->getAction()->getIdentifier();
         $action->timestamp = $requestValues->getTimestamp();
         $action->hmac = $hmac;

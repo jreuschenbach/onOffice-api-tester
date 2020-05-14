@@ -21,8 +21,7 @@ class ApiRequest
         $hmac = new Hmac();
         $json = $apiRequestJson->build($requestValues, $hmac->create($requestValues));
         $options['body'] = $json;
-        $response = $httpClient->request('POST', $this->config->getApiUrl());
-
+        $response = $httpClient->request('POST', $this->config->getApiUrl(), $options);
         return new ApiResponse($response->getContent());
     }
 }
