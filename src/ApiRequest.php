@@ -17,7 +17,12 @@ class ApiRequest
     public function send(RequestValues $requestValues): ApiResponse
     {
         $httpClient = new NativeHttpClient();
+        $apiRequestJson = new ApiRequestJson();
+        $hmac = new Hmac();
+        $json = $apiRequestJson->build($requestValues, $hmac->create($requestValues));
+        $options['body'] = $json;
         $response = $httpClient->request('POST', $this->config->getApiUrl());
+
         return new ApiResponse($response->getContent());
     }
 }
