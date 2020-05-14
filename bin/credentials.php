@@ -7,7 +7,7 @@ include(__DIR__.'/../vendor/autoload.php');
 
 $passwordReader = new PasswordReader();
 
-$token = $passwordReader->read(('Token: ');
+$token = $passwordReader->read('Token: ');
 $secret = $passwordReader->read('Secret: ');
 $password = $passwordReader->read('Password (needed to reload credentials): ');
 
