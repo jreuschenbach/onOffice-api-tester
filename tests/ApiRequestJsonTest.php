@@ -9,12 +9,12 @@ use jr\ooapi\dataObjects\RequestValues;
 
 class ApiRequestJsonTest extends TestCase
 {
-    public function testInstance()
+    public function testInstance(): void
     {
         $this->assertInstanceOf(ApiRequestJson::class, new ApiRequestJson());
     }
 
-    public function testBuild()
+    public function testBuild(): void
     {
         $credentials = new Credentials('token', 'secret');
         $resource = new Resource(1, 'address');

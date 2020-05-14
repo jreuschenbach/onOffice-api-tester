@@ -31,12 +31,12 @@ class CredentialStorageTest extends TestCase
         rmdir($this->_testDir);
     }
 
-    public function testInstance()
+    public function testInstance(): void
     {
         $this->assertInstanceOf(CredentialStorage::class, new CredentialStorage(''));
     }
 
-    public function testSave()
+    public function testSave(): void
     {
         $credentials = $this->createCredentials();
         $storage = new CredentialStorage($this->_testDir);
@@ -50,7 +50,7 @@ class CredentialStorageTest extends TestCase
         $this->assertStringNotContainsString('testSecret', $fileContentEncrypted);
     }
 
-    public function testLoad()
+    public function testLoad(): void
     {
         $credentials = $this->createCredentials();
         $storage = new CredentialStorage($this->_testDir);
@@ -62,7 +62,7 @@ class CredentialStorageTest extends TestCase
         $this->assertEquals('testSecret', $credentials->getSecret());
     }
 
-    private function createCredentials()
+    private function createCredentials(): Credentials
     {
         return new Credentials('testToken', 'testSecret');
     }

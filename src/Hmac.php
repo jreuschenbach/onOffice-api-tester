@@ -5,7 +5,7 @@ use jr\ooapi\dataObjects\RequestValues;
 
 class Hmac
 {
-    public function create(RequestValues $requestValues)
+    public function create(RequestValues $requestValues): string
     {
         $fields['accesstoken'] = $requestValues->getCredentials()->getToken();
         $fields['actionid'] = $requestValues->getAction()->getId();

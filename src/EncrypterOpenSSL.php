@@ -15,7 +15,7 @@ class EncrypterOpenSSL implements Encrypter
         $this->password = $password;
     }
 
-    public function encrypt($unencryptedString)
+    public function encrypt($unencryptedString): string
     {
         $ivlen = openssl_cipher_iv_length(self::METHOD);
         $iv = openssl_random_pseudo_bytes($ivlen);
@@ -24,7 +24,7 @@ class EncrypterOpenSSL implements Encrypter
         return $cipher.':'.base64_encode($iv);
     }
 
-    public function decrypt($encryptedString)
+    public function decrypt($encryptedString): string
     {
         $cipherAndIv = explode(':', $encryptedString);
         $cipher = $cipherAndIv[0];

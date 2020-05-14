@@ -5,7 +5,7 @@ use jr\ooapi\dataObjects\Credentials;
 
 class CredentialsTest extends TestCase
 {
-    public function testCredentials()
+    public function testCredentials(): void
     {
         $credentials = new Credentials('testToken', 'testSecret');
 
