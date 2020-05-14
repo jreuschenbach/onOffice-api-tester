@@ -2,6 +2,7 @@
 
 namespace jr\ooapi;
 use Symfony\Component\HttpClient\NativeHttpClient;
+use jr\ooapi\dataObjects\RequestValues;
 
 class ApiRequest
 {
@@ -13,7 +14,7 @@ class ApiRequest
         $this->config = $config;
     }
 
-    public function send(): ApiResponse
+    public function send(RequestValues $requestValues): ApiResponse
     {
         $httpClient = new NativeHttpClient();
         $response = $httpClient->request('POST', $this->config->getApiUrl());

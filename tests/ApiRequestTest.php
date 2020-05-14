@@ -4,6 +4,10 @@ use PHPUnit\Framework\TestCase;
 use jr\ooapi\Config;
 use jr\ooapi\ApiRequest;
 use jr\ooapi\ApiResponse;
+use jr\ooapi\dataObjects\RequestValues;
+use jr\ooapi\dataObjects\Credentials;
+use jr\ooapi\dataObjects\Resource;
+use jr\ooapi\dataObjects\Action;
 
 class ApiRequestTest extends TestCase
 {
@@ -17,7 +21,12 @@ class ApiRequestTest extends TestCase
     {
         $config = new Config('config/ooapi.ini');
         $apiRequest = new ApiRequest($config);
-        $apiResponse = $apiRequest->send();
+        $credentials = new Credentials('token', 'secret');
+        $resource = new Resource(1, 'address');
+        $action = new Action('read');
+        $requestValues = new RequestValues($credentials, $resource, $action, [], 0);
+
+        $apiResponse = $apiRequest->send($requestValues);
         $this->assertInstanceOf(ApiResponse::class, $apiResponse);
         $this->assertEquals(500, $apiResponse->getCode());
     }
