@@ -6,12 +6,12 @@ use jr\ooapi\dataObjects\RequestValues;
 
 class ApiRequest
 {
-    /** @var Config */
-    private $config = null;
+    /** @var string */
+    private $apiUrl = '';
 
-    public function __construct(Config $config)
+    public function __construct(string $apiUrl)
     {
-        $this->config = $config;
+        $this->apiUrl = $apiUrl;
     }
 
     public function send(RequestValues $requestValues): ApiResponse
@@ -21,7 +21,7 @@ class ApiRequest
         $hmac = new Hmac();
         $json = $apiRequestJson->build($requestValues, $hmac->create($requestValues));
         $options['body'] = $json;
-        $response = $httpClient->request('POST', $this->config->getApiUrl(), $options);
+        $response = $httpClient->request('POST', $this->apiUrl, $options);
         return new ApiResponse($response->getContent());
     }
 }

@@ -20,7 +20,7 @@ $resource = new Resource('', 'estate');
 $action = new Action('urn:onoffice-de-ns:smart:2.5:smartml:action:read');
 $requestValues = new RequestValues($credentials, $resource, $action, [], time());
 
-$apiRequest = new ApiRequest($config);
+$apiRequest = new ApiRequest($config->getApiUrl());
 $apiResponse = $apiRequest->send($requestValues);
 
 echo 'answer from onOffice API:'.PHP_EOL

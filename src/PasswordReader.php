@@ -11,6 +11,6 @@ class PasswordReader
         $input = fgets($stream,100);
         pclose($stream);
         echo PHP_EOL;
-        return $input;
+        return trim($input);
     }
 }

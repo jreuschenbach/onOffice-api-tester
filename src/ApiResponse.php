@@ -27,7 +27,7 @@ class ApiResponse
         return $this->response->status->message;
     }
 
-    public function getResults(): string
+    public function getResults(): array
     {
         return $this->response->response->results;
     }

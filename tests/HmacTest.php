@@ -17,7 +17,7 @@ class HmacTest extends TestCase
     public function testCreate(): void
     {
         $credentials = new Credentials('token', 'secret');
-        $resource = new Resource(1, 'type');
+        $resource = new Resource('1', 'type');
         $action = new Action('action', 'identifier');
         $parameters = ['paramKey' => 'paramValue'];
         $requestValues = new RequestValues($credentials, $resource, $action, $parameters, 100);
