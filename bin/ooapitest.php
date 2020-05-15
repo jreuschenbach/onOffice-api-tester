@@ -7,6 +7,14 @@ use jr\ooapi\dataObjects\RequestValues;
 
 include(__DIR__.'/../vendor/autoload.php');
 
+if (!array_key_exists(1, $argv))
+{
+    echo 'usage: ooapitest.php /path/json-file '.PHP_EOL
+        .'see Readme.md for details'.PHP_EOL;
+
+    exit;
+}
+
 $passwordReader = new PasswordReader();
 $password = $passwordReader->read('Password (to reload stored credentials)');
 
