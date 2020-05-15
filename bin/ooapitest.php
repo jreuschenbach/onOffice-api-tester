@@ -15,24 +15,33 @@ if (!array_key_exists(1, $argv))
     exit;
 }
 
-$passwordReader = new PasswordReader();
-$password = $passwordReader->read('Password (to reload stored credentials)');
+try
+{
+    $passwordReader = new PasswordReader();
+    $password = $passwordReader->read('Password (to reload stored credentials)');
 
-$config = new Config(__DIR__.'/../config/ooapi.ini');
+    $config = new Config(__DIR__.'/../config/ooapi.ini');
 
-$credentialStorage = new CredentialStorage($config->getCredentialDir());
-$credentialStorage->activateEncryption(new EncrypterOpenSSL($password));
-$credentials = $credentialStorage->load();
+    $credentialStorage = new CredentialStorage($config->getCredentialDir());
+    $credentialStorage->activateEncryption(new EncrypterOpenSSL($password));
+    $credentials = $credentialStorage->load();
 
-$resource = new Resource('', 'estate');
-$action = new Action('urn:onoffice-de-ns:smart:2.5:smartml:action:read');
-$requestValues = new RequestValues($credentials, $resource, $action, [], time());
+    $resource = new Resource('', 'estate');
+    $action = new Action('urn:onoffice-de-ns:smart:2.5:smartml:action:read');
+    $requestValues = new RequestValues($credentials, $resource, $action, [], time());
 
-$apiRequest = new ApiRequest($config->getApiUrl());
-$apiResponse = $apiRequest->send($requestValues);
+    $apiRequest = new ApiRequest($config->getApiUrl());
+    $apiResponse = $apiRequest->send($requestValues);
 
-echo 'answer from onOffice API:'.PHP_EOL
-    .'Status-Code: '.$apiResponse->getCode().PHP_EOL
-    .'Error-Code: '.$apiResponse->getErrorCode().PHP_EOL
-    .'Message: '.$apiResponse->getMessage().PHP_EOL
-    .'Results: '.json_encode($apiResponse->getResults()).PHP_EOL.PHP_EOL;
+    echo 'answer from onOffice API:'.PHP_EOL
+        .'Status-Code: '.$apiResponse->getCode().PHP_EOL
+        .'Error-Code: '.$apiResponse->getErrorCode().PHP_EOL
+        .'Message: '.$apiResponse->getMessage().PHP_EOL
+        .'Results: '.json_encode($apiResponse->getResults()).PHP_EOL.PHP_EOL;
+}
+catch (MissingCredentialFileException $exception)
+{
+    echo 'missing credential-file / call credentials.php first'.PHP_EOL
+        .'see Readme.md for details'.PHP_EOL;
+}
+

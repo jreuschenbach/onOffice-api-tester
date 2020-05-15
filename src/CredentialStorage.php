@@ -3,6 +3,7 @@
 namespace jr\ooapi;
 use jr\ooapi\dataObjects\Credentials;
 use jr\ooapi\interfaces\Encrypter;
+use jr\ooapi\MissingCredentialFileException;
 
 class CredentialStorage
 {
@@ -55,7 +56,14 @@ class CredentialStorage
 
     private function loadFile(): string
     {
-        $fileContent = file_get_contents($this->baseDir.'/ooapi_credentials');
+        $pathCredentialFile = $this->baseDir.'/ooapi_credentials';
+
+        if (!file_exists($pathCredentialFile))
+        {
+            throw new MissingCredentialFileException('missing file');
+        }
+
+        $fileContent = file_get_contents($pathCredentialFile);
 
         if ($this->isEncryptionEnabled())
         {

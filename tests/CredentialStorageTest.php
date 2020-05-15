@@ -11,24 +11,24 @@ class CredentialStorageTest extends TestCase
     const PASSWORD = 'test';
 
     /** @var string */
-    private $_testDir = '';
+    private $testDir = '';
 
     protected function setUp(): void
     {
         $config = new Config('config/ooapi.ini');
-        $this->_testDir = $config->getCredentialDir().'/test-ooapi-'.rand(0, 1000000000);
+        $this->testDir = $config->getCredentialDir().'/test-ooapi-'.rand(0, 1000000000);
 
-        mkdir($this->_testDir);
+        mkdir($this->testDir);
     }
 
     protected function tearDown(): void
     {
-        if (file_exists($this->_testDir.'/ooapi_credentials'))
+        if (file_exists($this->testDir.'/ooapi_credentials'))
         {
-            unlink($this->_testDir.'/ooapi_credentials');
+            unlink($this->testDir.'/ooapi_credentials');
         }
 
-        rmdir($this->_testDir);
+        rmdir($this->testDir);
     }
 
     public function testInstance(): void
@@ -39,13 +39,13 @@ class CredentialStorageTest extends TestCase
     public function testSave(): void
     {
         $credentials = $this->createCredentials();
-        $storage = new CredentialStorage($this->_testDir);
+        $storage = new CredentialStorage($this->testDir);
         $storage->activateEncryption(new EncrypterOpenSSL(self::PASSWORD));
         $storage->save($credentials);
 
-        $fileContentEncrypted = file_get_contents($this->_testDir);
+        $fileContentEncrypted = file_get_contents($this->testDir);
 
-        $this->assertFileExists($this->_testDir.'/ooapi_credentials');
+        $this->assertFileExists($this->testDir.'/ooapi_credentials');
         $this->assertStringNotContainsString('testToken', $fileContentEncrypted);
         $this->assertStringNotContainsString('testSecret', $fileContentEncrypted);
     }
@@ -53,13 +53,21 @@ class CredentialStorageTest extends TestCase
     public function testLoad(): void
     {
         $credentials = $this->createCredentials();
-        $storage = new CredentialStorage($this->_testDir);
+        $storage = new CredentialStorage($this->testDir);
         $storage->activateEncryption(new EncrypterOpenSSL(self::PASSWORD));
         $storage->save($credentials);
         $credentials = $storage->load();
 
         $this->assertEquals('testToken', $credentials->getToken());
         $this->assertEquals('testSecret', $credentials->getSecret());
+    }
+
+    public function testFailedLoading(): void
+    {
+        $storage = new CredentialStorage($this->testDir);
+
+        $this->expectException('jr\ooapi\MissingCredentialFileException');
+        $storage->load();
     }
 
     private function createCredentials(): Credentials
