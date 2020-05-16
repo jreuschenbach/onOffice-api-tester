@@ -2,6 +2,14 @@
 
 namespace jr\ooapi\dataObjects;
 
+/**
+ * Class RequestValues
+ *
+ * data-object for api-request-values
+ *
+ * @package jr\ooapi\dataObjects
+ */
+
 class RequestValues
 {
     /** @var Credentials */

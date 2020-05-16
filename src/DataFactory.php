@@ -4,6 +4,14 @@ namespace jr\ooapi;
 use jr\ooapi\dataObjects\Action;
 use jr\ooapi\dataObjects\Resource;
 
+/**
+ * Class DataFactory
+ *
+ * create data-objects from json-string
+ *
+ * @package jr\ooapi
+ */
+
 class DataFactory
 {
     public function createActionFromString($jsonString): Action

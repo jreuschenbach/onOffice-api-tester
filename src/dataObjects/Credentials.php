@@ -2,6 +2,14 @@
 
 namespace jr\ooapi\dataObjects;
 
+/**
+ * Class Credentials
+ *
+ * data-object for api-credentials (token / secret)
+ *
+ * @package jr\ooapi\dataObjects
+ */
+
 class Credentials
 {
     private $token = '';

@@ -2,6 +2,14 @@
 
 namespace jr\ooapi\dataObjects;
 
+/**
+ * Class Resource
+ *
+ * data-object for json-resource-tag
+ *
+ * @package jr\ooapi\dataObjects
+ */
+
 class Resource
 {
     /** @var string */

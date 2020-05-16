@@ -3,6 +3,14 @@
 namespace jr\ooapi;
 use jr\ooapi\interfaces\Encrypter;
 
+/**
+ * Class EncrypterOpenSSL
+ *
+ * Encrypt/decrypt strings using aes128 / openssl
+ *
+ * @package jr\ooapi
+ */
+
 class EncrypterOpenSSL implements Encrypter
 {
     const METHOD = 'aes128';

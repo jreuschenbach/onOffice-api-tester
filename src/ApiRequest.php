@@ -4,6 +4,14 @@ namespace jr\ooapi;
 use Symfony\Component\HttpClient\NativeHttpClient;
 use jr\ooapi\dataObjects\RequestValues;
 
+/**
+ * Class ApiRequest
+ *
+ * send requests to onOffice-API
+ *
+ * @package jr\ooapi
+ */
+
 class ApiRequest
 {
     /** @var string */

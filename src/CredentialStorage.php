@@ -4,6 +4,14 @@ namespace jr\ooapi;
 use jr\ooapi\dataObjects\Credentials;
 use jr\ooapi\interfaces\Encrypter;
 
+/**
+ * Class CredentialStorage
+ *
+ * Store api-credentials in a file / encrypted, if encryption is enabled
+ *
+ * @package jr\ooapi
+ */
+
 class CredentialStorage
 {
     const INDEX_TOKEN = 0;

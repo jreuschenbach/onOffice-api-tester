@@ -3,6 +3,15 @@
 namespace jr\ooapi;
 use jr\ooapi\dataObjects\RequestValues;
 
+/**
+ * Class Hmac
+ *
+ * Create HMAC for onOffice-API
+ *
+ * @see https://apidoc.onoffice.de
+ * @package jr\ooapi
+ */
+
 class Hmac
 {
     public function create(RequestValues $requestValues): string

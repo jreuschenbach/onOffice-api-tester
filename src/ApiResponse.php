@@ -2,6 +2,14 @@
 
 namespace jr\ooapi;
 
+/**
+ * Class ApiResponse
+ *
+ * parse api-response (json) and provides access to status-values / results
+ *
+ * @package jr\ooapi
+ */
+
 class ApiResponse
 {
     /** @var object */

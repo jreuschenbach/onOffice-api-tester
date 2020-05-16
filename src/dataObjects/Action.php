@@ -2,6 +2,14 @@
 
 namespace jr\ooapi\dataObjects;
 
+/**
+ * Class Action
+ *
+ * data-object for json-action-tag
+ *
+ * @package jr\ooapi\dataObjects
+ */
+
 class Action
 {
     /** @var string */

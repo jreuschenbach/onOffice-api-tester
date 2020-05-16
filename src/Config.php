@@ -2,6 +2,17 @@
 
 namespace jr\ooapi;
 
+/**
+ * Class Config
+ *
+ * config
+ * * api-url
+ * * credential-directory
+ *
+ * @see config/ooapi.ini
+ * @package jr\ooapi
+ */
+
 class Config
 {
     private $config = [];

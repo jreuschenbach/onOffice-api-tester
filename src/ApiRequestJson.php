@@ -3,6 +3,14 @@
 namespace jr\ooapi;
 use jr\ooapi\dataObjects\RequestValues;
 
+/**
+ * Class ApiRequestJson
+ *
+ * create json-request-string from data-objects
+ *
+ * @package jr\ooapi
+ */
+
 class ApiRequestJson
 {
     public function build(RequestValues $requestValues, string $hmac): string
