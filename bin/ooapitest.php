@@ -1,18 +1,36 @@
 <?php
 
 namespace jr\ooapi;
-use jr\ooapi\dataObjects\Resource;
-use jr\ooapi\dataObjects\Action;
 use jr\ooapi\dataObjects\RequestValues;
 
 include(__DIR__.'/../vendor/autoload.php');
 
-if (!array_key_exists(1, $argv))
-{
-    echo 'usage: ooapitest.php /path/json-file '.PHP_EOL
-        .'see Readme.md for details'.PHP_EOL;
+$jsonString = null;
 
-    exit;
+if (count($argv) == 3)
+{
+    $flag = $argv[1];
+    $source = $argv[2];
+
+    if ($flag == '-f')
+    {
+        $jsonString = file_get_contents($source);
+    }
+    elseif ($flag == '-s')
+    {
+        var_dump('jo');
+
+        $jsonString = $source;
+    }
+}
+
+if ($jsonString === null)
+{
+    echo '# missing source / usage:'.PHP_EOL
+        .'# php ooapitest.php -f file'.PHP_EOL
+        .'# php ooapitest.php -s json-strong'.PHP_EOL
+        .'# see Readme.md for details'.PHP_EOL.PHP_EOL;
+    die();
 }
 
 try
@@ -26,9 +44,12 @@ try
     $credentialStorage->activateEncryption(new EncrypterOpenSSL($password));
     $credentials = $credentialStorage->load();
 
-    $resource = new Resource('', 'estate');
-    $action = new Action('urn:onoffice-de-ns:smart:2.5:smartml:action:read');
-    $requestValues = new RequestValues($credentials, $resource, $action, [], time());
+    $dataFactory = new DataFactory();
+    $resource = $dataFactory->createResourceFromString($jsonString);
+    $action = $dataFactory->createActionFromString($jsonString);
+    $parameters = $dataFactory->createParametersFromString($jsonString);
+
+    $requestValues = new RequestValues($credentials, $resource, $action, $parameters, time());
 
     $apiRequest = new ApiRequest($config->getApiUrl());
     $apiResponse = $apiRequest->send($requestValues);
