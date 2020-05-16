@@ -18,8 +18,6 @@ if (count($argv) == 3)
     }
     elseif ($flag == '-s')
     {
-        var_dump('jo');
-
         $jsonString = $source;
     }
 }

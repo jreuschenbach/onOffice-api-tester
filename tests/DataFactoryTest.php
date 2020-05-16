@@ -4,6 +4,7 @@ use PHPUnit\Framework\TestCase;
 use jr\ooapi\DataFactory;
 use jr\ooapi\dataObjects\Action;
 use jr\ooapi\dataObjects\Resource;
+use jr\ooapi\JsonParseException;
 
 class DataFactoryTest extends TestCase
 {
@@ -44,5 +45,26 @@ class DataFactoryTest extends TestCase
         $this->assertArrayHasKey('data', $parameters);
         $this->assertCount(3, $parameters['data']);
         $this->assertEquals(['Id', 'kaufpreis', 'lage'], $parameters['data']);
+    }
+
+    public function testJsonParseErrorsParameters(): void
+    {
+        $dataFactory = new DataFactory();
+        $this->expectException(JsonParseException::class);
+        $dataFactory->createParametersFromString('');
+    }
+
+    public function testJsonParseErrorAction(): void
+    {
+        $dataFactory = new DataFactory();
+        $this->expectException(JsonParseException::class);
+        $dataFactory->createActionFromString('');
+    }
+
+    public function testJsonParseErrorResource(): void
+    {
+        $dataFactory = new DataFactory();
+        $this->expectException(JsonParseException::class);
+        $dataFactory->createResourceFromString('');
     }
 }
