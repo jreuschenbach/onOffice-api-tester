@@ -1,7 +1,6 @@
 <?php
 
 namespace jr\ooapi;
-use jr\ooapi\dataObjects\RequestValues;
 
 include(__DIR__.'/../vendor/autoload.php');
 
@@ -36,21 +35,8 @@ try
     $passwordReader = new PasswordReader();
     $password = $passwordReader->read('Password (to reload stored credentials)');
 
-    $config = new Config(__DIR__.'/../config/ooapi.ini');
-
-    $credentialStorage = new CredentialStorage($config->getCredentialDir());
-    $credentialStorage->activateEncryption(new EncrypterOpenSSL($password));
-    $credentials = $credentialStorage->load();
-
-    $dataFactory = new DataFactory();
-    $resource = $dataFactory->createResourceFromString($jsonString);
-    $action = $dataFactory->createActionFromString($jsonString);
-    $parameters = $dataFactory->createParametersFromString($jsonString);
-
-    $requestValues = new RequestValues($credentials, $resource, $action, $parameters, time());
-
-    $apiRequest = new ApiRequest($config->getApiUrl());
-    $apiResponse = $apiRequest->send($requestValues);
+    $apiTester = new OnOfficeApiTester();
+    $apiResponse = $apiTester->send($jsonString, $password);
 
     echo 'answer from onOffice API:'.PHP_EOL
         .'Status-Code: '.$apiResponse->getCode().PHP_EOL
