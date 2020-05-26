@@ -4,15 +4,36 @@
     <meta charset="UTF-8">
     <title>onOffice API-Tester</title>
     <link type="text/css" href="css/api-tester.css" rel="stylesheet" />
+    <script src="js/api-tester.js"></script>
 </head>
 <body>
 
 <h1>onOffice API-Tester</h1>
 
 <div class="grid-container">
-    <div class="authentication">Authentication</div>
-    <div class="request">request</div>
-    <div class="response">response</div>
+    <div class="messages">Messages</div>
+    <div class="authentication">
+        <div id="auth-new">
+            <label>Token: <input type="text" /></label>
+            <label>Secret: <input type="password" /></label>
+            <label>Password: <input type="password" /></label>
+            <input type="button" value="authenticate" />
+        </div>
+
+        <div id="auth-reuse">
+            <label>Password: <input type="password" /></label>
+            <input type="button" value="delete" />
+        </div>
+    </div>
+    <div class="send">
+        <input type="button" value="send" />
+    </div>
+    <div class="request">
+        <textarea>api-request</textarea>
+    </div>
+    <div class="response">
+        <textarea>api-response</textarea>
+    </div>
 </div>
 </body>
 </html>
