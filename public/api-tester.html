@@ -11,29 +11,33 @@
 <h1>onOffice API-Tester</h1>
 
 <div class="grid-container">
-    <div class="messages">Messages</div>
+    <div class="messages" id="message">Messages</div>
     <div class="authentication">
-        <div id="auth-new">
-            <label>Token: <input type="text" /></label>
-            <label>Secret: <input type="password" /></label>
-            <label>Password: <input type="password" /></label>
-            <input type="button" value="authenticate" />
-        </div>
+        <form method="POST" action="auth.php" name="authForm">
+            <div id="auth-new">
+                <label>Token: <input type="text" name="token" /></label>
+                <label>Secret: <input type="password" name="secret" /></label>
+                <label>Password: <input type="password" name="password" /></label>
+                <input type="submit" value="authenticate" />
+            </div>
+        </form>
 
         <div id="auth-reuse">
-            <label>Password: <input type="password" /></label>
             <input type="button" value="delete" />
         </div>
     </div>
-    <div class="send">
-        <input type="button" value="send" />
-    </div>
-    <div class="request">
-        <textarea>api-request</textarea>
-    </div>
-    <div class="response">
-        <textarea>api-response</textarea>
-    </div>
+
+    <form method="POST" action="ooapitest.php" name="requestForm">
+        <div class="send">
+            <input type="submit" value="send" id="sendRequest" />
+        </div>
+        <div class="request">
+            <textarea id="request" name="request">api-request</textarea>
+        </div>
+        <div class="response">
+            <textarea id="response">api-response</textarea>
+        </div>
+    </form>
 </div>
 </body>
 </html>

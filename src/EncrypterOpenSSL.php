@@ -18,7 +18,7 @@ class EncrypterOpenSSL implements Encrypter
     /** @var string */
     private $password = '';
 
-    public function __construct($password)
+    public function __construct(string $password)
     {
         $this->password = $password;
     }
