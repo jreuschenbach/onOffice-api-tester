@@ -14,18 +14,29 @@ document.addEventListener("DOMContentLoaded", function(event) {
         httpPost(authForm.action, data);
     });
 
+    document.getElementById("delete").addEventListener("click", function(){
+        httpGet("deleteCredentials.php");
+        refreshCredentialForm();
+    });
+
+    refreshCredentialForm();
+});
+
+function refreshCredentialForm()
+{
     var credentialsStored = httpGet("checkCredentialStorage.php");
 
     if (credentialsStored == "1")
     {
         document.getElementById("auth-new").style.display = "none";
+        document.getElementById("auth-exist").style.display = "block";
     }
     else
     {
-        document.getElementById("auth-reuse").style.display = "none";
+        document.getElementById("auth-exist").style.display = "none";
+        document.getElementById("auth-new").style.display = "block";
     }
-
-});
+}
 
 function httpGet(url)
 {
@@ -58,5 +69,7 @@ function responseHandler(httpState)
         {
             document.getElementById("response").innerText = JSON.stringify(jsonResponse.response);
         }
+
+        refreshCredentialForm();
     }
 }
