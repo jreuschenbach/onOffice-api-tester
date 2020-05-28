@@ -12,8 +12,28 @@ document.addEventListener("DOMContentLoaded", function(event) {
         event.preventDefault();
         var data = new FormData(authForm);
         httpPost(authForm.action, data);
-    })
+    });
+
+    var credentialsStored = httpGet("checkCredentialStorage.php");
+
+    if (credentialsStored == "1")
+    {
+        document.getElementById("auth-new").style.display = "none";
+    }
+    else
+    {
+        document.getElementById("auth-reuse").style.display = "none";
+    }
+
 });
+
+function httpGet(url)
+{
+    var request = new XMLHttpRequest();
+    request.open("GET", url, false);
+    request.send(null);
+    return request.responseText;
+}
 
 function httpPost(url, postData) {
     var request = new XMLHttpRequest();

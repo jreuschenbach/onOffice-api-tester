@@ -14,18 +14,23 @@
     <div class="messages" id="message">Messages</div>
     <div class="authentication">
         <form method="POST" action="auth.php" name="authForm">
-            <div id="auth-new">
-                <label>Token: <input type="text" name="token" /></label>
-                <label>Secret: <input type="password" name="secret" /></label>
-                <label>Password: <input type="password" name="password" /></label>
-                <input type="submit" value="authenticate" />
+            <div>
+                <div id="auth-new">
+                    <label>Token: <input type="text" name="token" /></label>
+                    <label>Secret: <input type="password" name="secret" /></label>
+                    <label>Password: <input type="password" name="password" /></label>
+                    <input type="submit" value="authenticate" />
+                </div>
+                <div id="auth-delete">
+                    <input type="button" value="delete" />
+                    <label>Password: <input type="password" name="password" /></label>
+                </div>
+
+
             </div>
         </form>
 
-        <div id="auth-reuse">
-            <input type="button" value="delete" />
-        </div>
-    </div>
+            </div>
 
     <form method="POST" action="ooapitest.php" name="requestForm">
         <div class="send">
