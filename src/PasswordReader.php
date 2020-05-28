@@ -15,10 +15,10 @@ class PasswordReader
     public function read($prompt): string
     {
         echo $prompt;
-        $stream = popen("read -s; echo \$REPLY","r");
-        $input = fgets($stream,100);
-        pclose($stream);
+        system('stty -echo');
+        $password = trim(fgets(STDIN));
+        system('stty echo');
         echo PHP_EOL;
-        return trim($input);
+        return trim($password);
     }
 }
