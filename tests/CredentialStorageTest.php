@@ -83,6 +83,14 @@ class CredentialStorageTest extends TestCase
         $storageRead->load();
     }
 
+    public function testCredentialsStored(): void
+    {
+        $storage = new CredentialStorage($this->testDir);
+        $this->assertFalse($storage->isSomethingStored());
+        $storage->save($this->createCredentials());
+        $this->assertTrue($storage->isSomethingStored());
+    }
+
     private function createCredentials(): Credentials
     {
         return new Credentials('testToken', 'testSecret');

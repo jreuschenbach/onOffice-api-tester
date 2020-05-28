@@ -33,7 +33,6 @@ class CredentialStorage
     {
         $content = $credentials->getToken().self::SEPARATOR.$credentials->getSecret();
         $this->writeFile($content);
-
     }
 
     public function load(): Credentials
@@ -42,6 +41,11 @@ class CredentialStorage
         $fileElements = explode(self::SEPARATOR, $credentialString);
 
         return new Credentials($fileElements[self::INDEX_TOKEN], $fileElements[self::INDEX_SECRET]);
+    }
+
+    public function isSomethingStored(): bool
+    {
+        return file_exists($this->pathCredentialFile());
     }
 
     public function activateEncryption(Encrypter $encrypter): void
@@ -58,19 +62,17 @@ class CredentialStorage
             $fileContent = $this->encrypter->encrypt($fileContent);
         }
 
-        file_put_contents($this->baseDir.'/ooapi_credentials', $fileContent);
+        file_put_contents($this->pathCredentialFile(), $fileContent);
     }
 
     private function loadFile(): string
     {
-        $pathCredentialFile = $this->baseDir.'/ooapi_credentials';
-
-        if (!file_exists($pathCredentialFile))
+        if (!file_exists($this->pathCredentialFile()))
         {
             throw new MissingCredentialFileException('missing file');
         }
 
-        $fileContent = file_get_contents($pathCredentialFile);
+        $fileContent = file_get_contents($this->pathCredentialFile());
 
         if ($this->isEncryptionEnabled())
         {
@@ -88,5 +90,10 @@ class CredentialStorage
     private function isEncryptionEnabled(): bool
     {
         return $this->encrypter instanceof Encrypter;
+    }
+
+    private function pathCredentialFile()
+    {
+        return $this->baseDir.'/ooapi_credentials';
     }
 }
