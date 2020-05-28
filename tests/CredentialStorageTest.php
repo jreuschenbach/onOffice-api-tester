@@ -91,6 +91,15 @@ class CredentialStorageTest extends TestCase
         $this->assertTrue($storage->isSomethingStored());
     }
 
+    public function testDeleteCredentials(): void
+    {
+        $storage = new CredentialStorage($this->testDir);
+        $storage->save($this->createCredentials());
+        $this->assertTrue($storage->isSomethingStored());
+        $storage->delete();
+        $this->assertFalse($storage->isSomethingStored());
+    }
+
     private function createCredentials(): Credentials
     {
         return new Credentials('testToken', 'testSecret');

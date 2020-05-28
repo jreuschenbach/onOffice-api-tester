@@ -43,6 +43,14 @@ class CredentialStorage
         return new Credentials($fileElements[self::INDEX_TOKEN], $fileElements[self::INDEX_SECRET]);
     }
 
+    public function delete(): void
+    {
+        if ($this->isSomethingStored())
+        {
+            unlink($this->pathCredentialFile());
+        }
+    }
+
     public function isSomethingStored(): bool
     {
         return file_exists($this->pathCredentialFile());
