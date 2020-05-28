@@ -70,6 +70,19 @@ class CredentialStorageTest extends TestCase
         $storage->load();
     }
 
+    public function testWrongPassword(): void
+    {
+        $credentials = $this->createCredentials();
+        $storageWrite = new CredentialStorage($this->testDir);
+        $storageWrite->activateEncryption(new EncrypterOpenSSL('password'));
+        $storageWrite->save($credentials);
+
+        $storageRead = new CredentialStorage($this->testDir);
+        $storageRead->activateEncryption(new EncrypterOpenSSL('anotherPassword'));
+        $this->expectException('jr\ooapi\DecryptCredentialsException');
+        $storageRead->load();
+    }
+
     private function createCredentials(): Credentials
     {
         return new Credentials('testToken', 'testSecret');

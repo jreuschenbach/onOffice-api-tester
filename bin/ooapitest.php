@@ -49,6 +49,10 @@ catch (MissingCredentialFileException $exception)
     echo 'missing credential-file / call credentials.php first'.PHP_EOL
         .'see Readme.md for details'.PHP_EOL;
 }
+catch (DecryptCredentialsException $exception)
+{
+    echo 'error while reading stored credentials / maybe wrong password to decrypt'.PHP_EOL;
+}
 catch (JsonParseException $exception)
 {
     echo 'json-parse-error / please make sure the fiven json-string is correct'.PHP_EOL
