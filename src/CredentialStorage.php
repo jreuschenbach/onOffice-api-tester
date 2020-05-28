@@ -75,6 +75,11 @@ class CredentialStorage
         if ($this->isEncryptionEnabled())
         {
             $fileContent = $this->encrypter->decrypt($fileContent);
+
+            if ($fileContent === '')
+            {
+                throw new DecryptCredentialsException();
+            }
         }
 
         return $fileContent;
