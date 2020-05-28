@@ -12,7 +12,7 @@ $password = array_key_exists('password', $_POST) ? $_POST['password'] : null;
 if (is_string($token) && is_string($secret) && is_string($password))
 {
     $credentials = new Credentials($token, $secret);
-    $config = new Config(__DIR__ . '/../../config/ooapi.ini');
+    $config = new Config(__DIR__ . '/../config/ooapi.ini');
     $credentialStorage = new CredentialStorage($config->getCredentialDir());
     $credentialStorage->activateEncryption(new EncrypterOpenSSL($password));
     $credentialStorage->save($credentials);

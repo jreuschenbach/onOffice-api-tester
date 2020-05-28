@@ -27,13 +27,17 @@ try
 }
 catch (MissingCredentialFileException $exception)
 {
-    $message = 'missing credential-file / call credentials.php first'.PHP_EOL
-        .'see Readme.md for details'.PHP_EOL;
+    $message = 'missing credential-file / call credentials.php first'
+        .'see Readme.md for details';
 }
 catch (JsonParseException $exception)
 {
-    $message = 'json-parse-error / please make sure the fiven json-string is correct'.PHP_EOL
-        .'see Readme.md for details'.PHP_EOL;
+    $message = 'json-parse-error / please make sure the fiven json-string is correct'
+        .'see Readme.md for details';
+}
+catch (DecryptCredentialsException $exception)
+{
+    $message = 'error while reading stored credentials / maybe wrong password to decrypt';
 }
 catch (\Exception $exception)
 {
