@@ -15,15 +15,15 @@
     <div class="authentication">
         <form method="POST" action="auth.php" name="authForm">
             <div>
+                <label>Password: <input type="password" name="password" /></label>
+
                 <div id="auth-new">
                     <label>Token: <input type="text" name="token" /></label>
                     <label>Secret: <input type="password" name="secret" /></label>
-                    <label>Password: <input type="password" name="password" /></label>
                     <input type="submit" value="authenticate" />
                 </div>
-                <div id="auth-delete">
-                    <input type="button" value="delete" />
-                    <label>Password: <input type="password" name="password" /></label>
+                <div id="auth-exist">
+                    <input type="button" value="delete" id="delete" />
                 </div>
 
 
