@@ -11,7 +11,7 @@ if (count($argv) == 3)
     $flag = $argv[1];
     $source = $argv[2];
 
-    if ($flag == '-f')
+    if ($flag == '-f' && file_exists($source))
     {
         $jsonString = file_get_contents($source);
     }
@@ -24,7 +24,7 @@ if (count($argv) == 3)
 if ($jsonString === null)
 {
     echo '# missing source / usage:'.PHP_EOL
-        .'# php ooapitest.php -f file'.PHP_EOL
+        .'# php ooapitest.php -f file (file must exist!)'.PHP_EOL
         .'# php ooapitest.php -s json-strong'.PHP_EOL
         .'# see Readme.md for details'.PHP_EOL.PHP_EOL;
     die();
