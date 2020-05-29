@@ -5,6 +5,19 @@ test-suite for onOffice API
 * PHP >= 7.4
 * Linux / OSX
 
+# Installation
+git clone
+composer install #dev-mode
+composer install --no-dev #op-mode
+
+# ooapi.ini
+In config/ooapi.ini you can:
+* select the onOffice-API-URL
+* select the directory to store the credentials (encrypted)
+
+## gui
+* call public/api-tester.html in browser
+
 ## Command-Line-Version
 
 #### credentials.php
@@ -21,9 +34,5 @@ usage:
 * php ooapitest.php -s '{json-string}'
 
 json-string must be the complete action-tag, example: 
-<pre> {"actionid":"urn:onoffice-de-ns:smart:2.5:smartml:action:read","resourceid":"resource-id","resourcetype":"estate","identifier":"","timestamp":1589567897,"hmac":"88462bce11c5c47fb738dba64a36ba00","parameters":{"data":["Id", "kaufpreis", "lage"]}}</pre>pre>
+<pre> {"actionid":"urn:onoffice-de-ns:smart:2.5:smartml:action:read","resourceid":"resource-id","resourcetype":"estate","identifier":"","timestamp":1589567897,"hmac":"88462bce11c5c47fb738dba64a36ba00","parameters":{"data":["Id", "kaufpreis", "lage"]}}</pre>
 
-#### ooapi.ini
-In config/ooapi.ini you can:
-* select the onOffice-API-URL
-* select the directory to store the credentials (encrypted)
