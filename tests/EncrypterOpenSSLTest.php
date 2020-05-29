@@ -41,4 +41,10 @@ class EncrypterOpenSSLTest extends TestCase
         $encryptElementsSecondCall = explode(':', $encryptedSecondCall);
         $this->assertNotEquals($encryptElementsFirstCall[0], $encryptElementsSecondCall[0]);
     }
+
+    public function testEmptyPassword(): void
+    {
+        $this->expectException('jr\ooapi\EmptyPasswordException');
+        new EncrypterOpenSSL('');
+    }
 }
