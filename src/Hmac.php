@@ -29,7 +29,6 @@ class Hmac
 
         $parametersBundled = json_encode($parameters);
         $fieldsBundled = implode(',', $fields);
-        $hmac = md5($requestValues->getCredentials()->getSecret().md5($parametersBundled.','.$fieldsBundled));
-        return $hmac;
+        return md5($requestValues->getCredentials()->getSecret().md5($parametersBundled.','.$fieldsBundled));
     }
 }

@@ -31,7 +31,6 @@ class ApiResponseTest extends TestCase
     private function createDefaultResponse(): ApiResponse
     {
         $defaultAnswer = '{"status":{"code":500,"errorcode":"Syntax error","message":"Unknown error occured"},"response":{"results":[]}}';
-        $apiResponse = new ApiResponse($defaultAnswer);
-        return $apiResponse;
+        return new ApiResponse($defaultAnswer);
     }
 }
