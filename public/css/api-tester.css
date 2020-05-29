@@ -56,7 +56,7 @@ label
     height: 400px;
 }
 
-.request > textarea, .response > div
+.request > textarea, .response > pre
 {
     width: 99%;
     height: 100%;
@@ -70,10 +70,12 @@ label
     float: left;
 }
 
-.response > div
+.response > pre
 {
     float: right;
     overflow: auto;
+    padding: 0px;
+    margin: 0px;
 }
 
 .messages

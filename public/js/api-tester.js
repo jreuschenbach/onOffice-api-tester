@@ -78,7 +78,7 @@ function responseHandler(httpState)
 
         if (jsonResponse.response != undefined)
         {
-            document.getElementById("response").innerText = JSON.stringify(jsonResponse.response);
+            document.getElementById("response").innerText = JSON.stringify(jsonResponse.response, null, 2);
         }
 
         enableSendButton();
