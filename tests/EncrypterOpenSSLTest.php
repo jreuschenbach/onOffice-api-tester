@@ -32,9 +32,9 @@ class EncrypterOpenSSLTest extends TestCase
 
     public function testIv(): void
     {
-        $pEncrypter = new EncrypterOpenSSL(self::PASSWORD);
-        $encryptedFirstCall = $pEncrypter->encrypt('test');
-        $encryptedSecondCall = $pEncrypter->encrypt('test');
+        $encrypter = new EncrypterOpenSSL(self::PASSWORD);
+        $encryptedFirstCall = $encrypter->encrypt('test');
+        $encryptedSecondCall = $encrypter->encrypt('test');
         $this->assertNotEquals($encryptedFirstCall, $encryptedSecondCall);
 
         $encryptElementsFirstCall = explode(':', $encryptedFirstCall);
