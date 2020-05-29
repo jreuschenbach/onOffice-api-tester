@@ -2,7 +2,7 @@
 test-suite for onOffice API
 
 # Requirements
-* PHP >= 7.4
+* PHP >= 7.2
 * Linux / OSX
 
 # Installation
