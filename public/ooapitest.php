@@ -37,6 +37,10 @@ catch (DecryptCredentialsException $exception)
 {
     $message = 'error while reading stored credentials / maybe wrong password to decrypt';
 }
+catch (EmptyPasswordException $exception)
+{
+    $message = 'please enter a password';
+}
 catch (\Exception $exception)
 {
     $message = $exception->getMessage();
