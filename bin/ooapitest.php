@@ -55,7 +55,7 @@ catch (DecryptCredentialsException $exception)
 }
 catch (JsonParseException $exception)
 {
-    echo 'json-parse-error / please make sure the fiven json-string is correct'.PHP_EOL
+    echo 'json-parse-error / please make sure the given json-string is correct'.PHP_EOL
         .'see Readme.md for details'.PHP_EOL;
 }
 

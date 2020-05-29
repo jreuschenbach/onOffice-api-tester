@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     document.getElementById("delete").addEventListener("click", function(){
         httpGet("deleteCredentials.php");
         refreshCredentialForm();
+        appendMessage("api-credentials deleted");
     });
 
     refreshCredentialForm();
@@ -54,6 +55,13 @@ function httpPost(url, postData) {
     request.onreadystatechange = responseHandler;
 }
 
+function appendMessage(message)
+{
+    var messageBox = document.getElementById("message");
+    messageBox.innerText = messageBox.innerText.concat("\n" + message);
+    messageBox.scrollTop = messageBox.scrollHeight;
+}
+
 function responseHandler(httpState)
 {
     if (httpState.currentTarget.readyState === 4)
@@ -62,7 +70,7 @@ function responseHandler(httpState)
 
         if (jsonResponse.message != undefined)
         {
-            document.getElementById("message").innerText = jsonResponse.message;
+            appendMessage(jsonResponse.message);
         }
 
         if (jsonResponse.response != undefined)

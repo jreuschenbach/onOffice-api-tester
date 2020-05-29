@@ -27,13 +27,11 @@ try
 }
 catch (MissingCredentialFileException $exception)
 {
-    $message = 'missing credential-file / call credentials.php first'
-        .'see Readme.md for details';
+    $message = 'missing credential-file / enter api-token, api-secret and a password for encryption';
 }
 catch (JsonParseException $exception)
 {
-    $message = 'json-parse-error / please make sure the fiven json-string is correct'
-        .'see Readme.md for details';
+    $message = 'json-parse-error / please make sure the given json-string is correct';
 }
 catch (DecryptCredentialsException $exception)
 {
