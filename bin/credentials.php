@@ -11,8 +11,17 @@ $token = $passwordReader->read('Token: ');
 $secret = $passwordReader->read('Secret: ');
 $password = $passwordReader->read('Password (needed to reload credentials): ');
 
-$credentials = new Credentials($token, $secret);
-$config = new Config(__DIR__.'/../config/ooapi.ini');
-$credentialStorage = new CredentialStorage($config->getCredentialDir());
-$credentialStorage->activateEncryption(new EncrypterOpenSSL($password));
-$credentialStorage->save($credentials);
+try
+{
+    $credentials = new Credentials($token, $secret);
+    $config = new Config(__DIR__.'/../config/ooapi.ini');
+    $credentialStorage = new CredentialStorage($config->getCredentialDir());
+    $credentialStorage->activateEncryption(new EncrypterOpenSSL($password));
+    $credentialStorage->save($credentials);
+
+    echo 'credentials stored encrypted...'.PHP_EOL;
+}
+catch (EmptyPasswordException $exception)
+{
+    echo 'password must not be empty'.PHP_EOL;
+}
