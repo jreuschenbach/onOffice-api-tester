@@ -20,6 +20,11 @@ class EncrypterOpenSSL implements Encrypter
 
     public function __construct(string $password)
     {
+        if ($password == '')
+        {
+            throw new EmptyPasswordException();
+        }
+
         $this->password = $password;
     }
 
