@@ -17,7 +17,8 @@
                 <li>enter api-token + api-secret to authenticate</li>
                 <li>you need to enter an individual to store api-credentials encrypted</li>
                 <li>if you have already stored credentials, re-enter your password for decryption</li>
-                <li>send api-requests and see the result...</li>
+                <li>send api-actions and see the result...</li>
+                <li>api-action: { "actionid": [...] }</li>
             </ul>
         </div>
 
@@ -43,7 +44,7 @@
             <input type="submit" value="send" id="sendRequest" />
         </div>
         <div class="request">
-            <textarea id="request" name="request">paste api-request here...</textarea>
+            <textarea id="request" name="request">paste api-action here...</textarea>
         </div>
         <div class="response">
             <pre id="response"></pre>
