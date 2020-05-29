@@ -1,11 +1,100 @@
-.request > textarea
+body
 {
-    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    background-color: #F5F5F5;
+    font-family: "Open Sans";
+    font-size: 12px;
+}
+
+h1
+{
+    font-size: 16px;
+    float: left;
+}
+
+label
+{
+    display: block;
+}
+
+.auth
+{
+    float: right;
+    text-align: right;
+    font-size: 12px;
+}
+
+.auth > *, .auth-new > *
+{
+    margin-bottom: 2px;
+}
+
+.readme
+{
+    float: left;
+    font-size: 12px;
+}
+
+.header {
+    height: 100px;
+    background-color: #585858;
+    margin: 0px;
+    color: #F5F5F5;
+    padding: 10px;
+}
+
+.main
+{
+    padding: 10px;
+}
+
+.request, .response
+{
+    width: 50%;
+    float: left;
     height: 400px;
 }
 
-.response > textarea
+.request > textarea, .response > div
 {
-    width: 100%;
-    height: 400px;
+    width: 99%;
+    height: 100%;
+    background-color: #FFFFFF;
+    border: solid 1px;
+    padding: 2px;
+}
+
+.request > textarea
+{
+    float: left;
+}
+
+.response > div
+{
+    float: right;
+    overflow: auto;
+}
+
+.messages
+{
+    height: 80px;
+    padding: 5px;
+    margin: 10px;
+    border: solid 1px;
+    overflow: auto;
+    background-color: #FFFFFF;
+    font-size: 12px;
+}
+
+.send
+{
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.send > input
+{
+    width: 400px;
+    height: 40px;
 }

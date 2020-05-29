@@ -4,45 +4,51 @@
     <meta charset="UTF-8">
     <title>onOffice API-Tester</title>
     <link type="text/css" href="css/api-tester.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
     <script src="js/api-tester.js"></script>
 </head>
 <body>
 
-<h1>onOffice API-Tester</h1>
+<form method="POST" action="auth.php" name="authForm">
+    <div class="header">
+        <h1>onOffice API-tester</h1>
+        <div class="readme">
+            <ul>
+                <li>enter api-token + api-secret to authenticate</li>
+                <li>you need to enter an individual to store api-credentials encrypted</li>
+                <li>if you have already stored credentials, re-enter your password for decryption</li>
+                <li>send api-requests and see the result...</li>
+            </ul>
+        </div>
 
-<div class="grid-container">
-    <div class="messages" id="message">Messages</div>
-    <div class="authentication">
-        <form method="POST" action="auth.php" name="authForm">
-            <div>
-                <label>Password: <input type="password" name="password" /></label>
-
-                <div id="auth-new">
-                    <label>Token: <input type="text" name="token" /></label>
-                    <label>Secret: <input type="password" name="secret" /></label>
-                    <input type="submit" value="authenticate" />
-                </div>
-                <div id="auth-exist">
-                    <input type="button" value="delete" id="delete" />
-                </div>
-
-
-            </div>
-        </form>
-
+        <div class="auth">
+            <label for="password">Password <input type="password" name="password" id="password" /></label>
+            <div id="auth-new" class="auth-new">
+                <label for="token">API-Token <input type="text" name="token" id="token" /></label>
+                <label for="secret">API-Secret <input type="password" name="secret" id="secret" /></label>
+                <input type="submit" value="authenticate" />
             </div>
 
-    <form method="POST" action="ooapitest.php" name="requestForm">
+            <div id="auth-exist">
+                <input type="button" value="delete stored credentials" id="delete" />
+            </div>
+        </div>
+    </div>
+    <div class="messages" id="message">welcome to onOffice API-tester</div>
+</form>
+
+<form method="POST" action="ooapitest.php" name="requestForm">
+    <div class="main">
         <div class="send">
             <input type="submit" value="send" id="sendRequest" />
         </div>
         <div class="request">
-            <textarea id="request" name="request">api-request</textarea>
+            <textarea id="request" name="request">paste api-request here...</textarea>
         </div>
         <div class="response">
-            <textarea id="response">api-response</textarea>
+            <div id="response"></div>
         </div>
-    </form>
-</div>
+    </div>
+</form>
 </body>
 </html>
