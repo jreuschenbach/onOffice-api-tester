@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         event.preventDefault();
         var data = new FormData(requestForm);
         data.append('password', document.forms.authForm.password.value);
+        disableSendButton();
         appendMessage("sending request to onOffice API...");
         httpPost(requestForm.action, data);
     });
@@ -80,6 +81,17 @@ function responseHandler(httpState)
             document.getElementById("response").innerText = JSON.stringify(jsonResponse.response);
         }
 
+        enableSendButton();
         refreshCredentialForm();
     }
+}
+
+function disableSendButton()
+{
+    document.getElementById("sendRequest").disabled = "disabled";
+}
+
+function enableSendButton()
+{
+    document.getElementById("sendRequest").disabled = null;
 }
