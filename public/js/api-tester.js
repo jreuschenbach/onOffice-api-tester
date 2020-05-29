@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         event.preventDefault();
         var data = new FormData(requestForm);
         data.append('password', document.forms.authForm.password.value);
+        appendMessage("sending request to onOffice API...");
         httpPost(requestForm.action, data);
     });
 
@@ -11,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     authForm.addEventListener('submit', function(event){
         event.preventDefault();
         var data = new FormData(authForm);
+        appendMessage("sending auth-request...");
         httpPost(authForm.action, data);
     });
 
