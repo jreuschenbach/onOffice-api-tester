@@ -27,18 +27,57 @@ class ApiRequestJsonTest extends TestCase
         $hmac = 'hmac-test';
 
         $requestJson = new ApiRequestJson();
-        $json = $requestJson->build($requestValues, $hmac);
-        $this->assertIsString($json);
-        $this->assertStringContainsString('"token":"token"', $json);
-        $this->assertStringContainsString('"request":', $json);
-        $this->assertStringContainsString('"actions":', $json);
-        $this->assertStringContainsString('"actionid":"read"', $json);
-        $this->assertStringContainsString('"resourceid":"1"', $json);
-        $this->assertStringContainsString('"resourcetype":"address"', $json);
-        $this->assertStringContainsString('"identifier":"identifier"', $json);
-        $this->assertStringContainsString('"timestamp":0', $json);
-        $this->assertStringContainsString('"hmac":"hmac-test', $json);
-        $this->assertStringContainsString('"parameters":', $json);
-        $this->assertStringContainsString('"paramKey":"paramValue"', $json);
+        $jsonString = $requestJson->build($requestValues, $hmac);
+        $this->assertIsString($jsonString);
+
+        $json = json_decode($jsonString, true);
+        $this->checkJsonStructure($json);
+
+        $jsonAction = $json['request']['actions'][0];
+        $this->checkJsonAction($jsonAction);
+
+        $jsonParameters = $jsonAction['parameters'];
+        $this->checkJsonParameters($jsonParameters);
+    }
+
+    private function checkJsonAction($jsonAction): void
+    {
+        $this->assertArrayHasKey('actionid', $jsonAction);
+        $this->assertEquals('read', $jsonAction['actionid']);
+
+        $this->assertArrayHasKey('resourceid', $jsonAction);
+        $this->assertEquals('1', $jsonAction['resourceid']);
+
+        $this->assertArrayHasKey('resourcetype', $jsonAction);
+        $this->assertEquals('address', $jsonAction['resourcetype']);
+
+        $this->assertArrayHasKey('identifier', $jsonAction);
+        $this->assertEquals('identifier', $jsonAction['identifier']);
+
+        $this->assertArrayHasKey('timestamp', $jsonAction);
+        $this->assertEquals('0', $jsonAction['timestamp']);
+
+        $this->assertArrayHasKey('hmac', $jsonAction);
+        $this->assertEquals('hmac-test', $jsonAction['hmac']);
+
+        $this->assertArrayHasKey('parameters', $jsonAction);
+        $this->assertCount(1, $jsonAction['parameters']);
+    }
+
+    private function checkJsonStructure($json): void
+    {
+        $this->assertIsArray($json);
+        $this->assertArrayHasKey('token', $json);
+        $this->assertEquals('token', $json['token']);
+        $this->assertArrayHasKey('request', $json);
+        $this->assertArrayHasKey('actions', $json['request']);
+        $this->assertCount(1, $json['request']['actions']);
+        $this->assertArrayHasKey(0, $json['request']['actions']);
+    }
+
+    private function checkJsonParameters($jsonParameters): void
+    {
+        $this->assertArrayHasKey('paramKey', $jsonParameters);
+        $this->assertEquals('paramValue', $jsonParameters['paramKey']);
     }
 }
