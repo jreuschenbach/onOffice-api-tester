@@ -9,11 +9,6 @@ use jr\ooapi\dataObjects\Action;
 
 class HmacTest extends TestCase
 {
-    public function testInstance(): void
-    {
-        $this->assertInstanceOf(Hmac::class, new Hmac());
-    }
-
     public function testCreate(): void
     {
         $credentials = new Credentials('token', 'secret');

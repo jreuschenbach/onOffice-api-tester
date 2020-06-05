@@ -31,11 +31,6 @@ class CredentialStorageTest extends TestCase
         rmdir($this->testDir);
     }
 
-    public function testInstance(): void
-    {
-        $this->assertInstanceOf(CredentialStorage::class, new CredentialStorage(''));
-    }
-
     public function testSave(): void
     {
         $credentials = $this->createCredentials();

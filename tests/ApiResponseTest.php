@@ -5,11 +5,6 @@ use jr\ooapi\ApiResponse;
 
 class ApiResponseTest extends TestCase
 {
-    public function testInstance(): void
-    {
-        $this->assertInstanceOf(ApiResponse::class, new ApiResponse(''));
-    }
-
     public function testGetCode(): void
     {
         $apiResponse = $this->createDefaultResponse();

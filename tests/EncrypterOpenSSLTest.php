@@ -7,11 +7,6 @@ class EncrypterOpenSSLTest extends TestCase
 {
     const PASSWORD = 'test-password';
 
-    public function testInstance(): void
-    {
-        $this->assertInstanceOf(EncrypterOpenSSL::class, new EncrypterOpenSSL(self::PASSWORD));
-    }
-
     public function testEncrypt(): void
     {
         $pEncrypter = new EncrypterOpenSSL(self::PASSWORD);

@@ -11,12 +11,6 @@ use jr\ooapi\dataObjects\Action;
 
 class ApiRequestTest extends TestCase
 {
-    public function testInstance(): void
-    {
-        $config = new Config('config/ooapi.ini');
-        $this->assertInstanceOf(ApiRequest::class, new ApiRequest($config->getApiUrl()));
-    }
-
     public function testRequest(): void
     {
         $config = new Config('config/ooapi.ini');
