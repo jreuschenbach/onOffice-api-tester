@@ -13,9 +13,6 @@ class CredentialsTest extends TestCase
     {
         $credentials = new Credentials('testToken', 'testSecret');
 
-        $this->assertTrue(property_exists($credentials, 'token'));
-        $this->assertTrue(property_exists($credentials, 'secret'));
-
         $this->assertEquals('testToken', $credentials->getToken());
         $this->assertEquals('testSecret', $credentials->getSecret());
     }
