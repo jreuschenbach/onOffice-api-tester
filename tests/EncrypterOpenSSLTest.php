@@ -3,6 +3,10 @@
 use PHPUnit\Framework\TestCase;
 use jr\ooapi\EncrypterOpenSSL;
 
+/**
+ * @covers \jr\ooapi\EncrypterOpenSSL
+ */
+
 class EncrypterOpenSSLTest extends TestCase
 {
     const PASSWORD = 'test-password';

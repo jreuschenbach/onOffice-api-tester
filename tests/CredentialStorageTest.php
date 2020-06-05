@@ -6,6 +6,13 @@ use jr\ooapi\dataObjects\Credentials;
 use jr\ooapi\Config;
 use jr\ooapi\EncrypterOpenSSL;
 
+/**
+ * @covers \jr\ooapi\CredentialStorage
+ * @uses \jr\ooapi\Config
+ * @uses \jr\ooapi\EncrypterOpenSSL
+ * @uses \jr\ooapi\dataObjects\Credentials
+ */
+
 class CredentialStorageTest extends TestCase
 {
     const PASSWORD = 'test';

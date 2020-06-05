@@ -3,6 +3,10 @@
 use PHPUnit\Framework\TestCase;
 use jr\ooapi\ApiResponse;
 
+/**
+ * @covers \jr\ooapi\ApiResponse
+ */
+
 class ApiResponseTest extends TestCase
 {
     public function testGetCode(): void

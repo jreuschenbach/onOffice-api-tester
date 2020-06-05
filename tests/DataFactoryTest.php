@@ -6,6 +6,12 @@ use jr\ooapi\dataObjects\Action;
 use jr\ooapi\dataObjects\Resource;
 use jr\ooapi\JsonParseException;
 
+/**
+ * @covers \jr\ooapi\DataFactory
+ * @uses \jr\ooapi\dataObjects\Action
+ * @uses \jr\ooapi\dataObjects\Resource
+ */
+
 class DataFactoryTest extends TestCase
 {
     const JSON = '{"actionid":"urn:onoffice-de-ns:smart:2.5:smartml:action:read","resourceid":"resource-id","resourcetype":"estate","identifier":"","timestamp":1589567897,"hmac":"88462bce11c5c47fb738dba64a36ba00","parameters":{"data":["Id", "kaufpreis", "lage"]}}';

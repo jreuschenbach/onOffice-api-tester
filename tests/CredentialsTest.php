@@ -3,6 +3,10 @@
 use PHPUnit\Framework\TestCase;
 use jr\ooapi\dataObjects\Credentials;
 
+/**
+ * @covers \jr\ooapi\dataObjects\Credentials
+ */
+
 class CredentialsTest extends TestCase
 {
     public function testCredentials(): void

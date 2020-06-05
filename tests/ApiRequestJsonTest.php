@@ -7,6 +7,14 @@ use jr\ooapi\dataObjects\Resource;
 use jr\ooapi\dataObjects\Action;
 use jr\ooapi\dataObjects\RequestValues;
 
+/**
+ * @covers \jr\ooapi\ApiRequestJson
+ * @uses \jr\ooapi\dataObjects\Credentials
+ * @uses \jr\ooapi\dataObjects\Action
+ * @uses \jr\ooapi\dataObjects\RequestValues
+ * @uses \jr\ooapi\dataObjects\Resource
+ */
+
 class ApiRequestJsonTest extends TestCase
 {
     public function testBuild(): void

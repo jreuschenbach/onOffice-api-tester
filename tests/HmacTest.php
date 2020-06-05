@@ -7,6 +7,14 @@ use jr\ooapi\dataObjects\Credentials;
 use jr\ooapi\dataObjects\Resource;
 use jr\ooapi\dataObjects\Action;
 
+/**
+ * @covers \jr\ooapi\Hmac
+ * @uses \jr\ooapi\dataObjects\Resource
+ * @uses \jr\ooapi\dataObjects\Action
+ * @uses \jr\ooapi\dataObjects\Credentials
+ * @uses \jr\ooapi\dataObjects\RequestValues
+ */
+
 class HmacTest extends TestCase
 {
     public function testCreate(): void
