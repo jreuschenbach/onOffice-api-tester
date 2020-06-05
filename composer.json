@@ -1,5 +1,6 @@
 {
   "name": "jr/ooapi",
+  "type": "project",
   "description": "test onOffice API",
   "minimum-stability": "stable",
   "license": "MIT",
@@ -12,7 +13,8 @@
   "require": {
     "symfony/http-client": "^5",
     "ext-json": "*",
-    "ext-openssl": "*"
+    "ext-openssl": "*",
+    "php": "^7.2.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^8"
