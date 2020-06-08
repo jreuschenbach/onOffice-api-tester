@@ -1,6 +1,6 @@
 <?php
 
-namespace jr\ooapi\interfaces;
+namespace jr\ooapi;
 
 /**
  * Interface Encrypter

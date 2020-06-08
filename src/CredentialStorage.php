@@ -2,7 +2,7 @@
 
 namespace jr\ooapi;
 use jr\ooapi\dataObjects\Credentials;
-use jr\ooapi\interfaces\Encrypter;
+use jr\ooapi\Encrypter;
 
 /**
  * Class CredentialStorage

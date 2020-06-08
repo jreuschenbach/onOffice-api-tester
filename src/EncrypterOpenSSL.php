@@ -1,7 +1,7 @@
 <?php
 
 namespace jr\ooapi;
-use jr\ooapi\interfaces\Encrypter;
+use jr\ooapi\Encrypter;
 
 /**
  * Class EncrypterOpenSSL
