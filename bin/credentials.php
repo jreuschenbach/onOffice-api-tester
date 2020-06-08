@@ -3,6 +3,7 @@
 
 namespace jr\ooapi;
 use jr\ooapi\dataObjects\Credentials;
+use jr\ooapi\cli\PasswordReader;
 
 include(__DIR__.'/../vendor/autoload.php');
 

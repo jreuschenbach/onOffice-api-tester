@@ -1,13 +1,13 @@
 <?php
 
-namespace jr\ooapi;
+namespace jr\ooapi\cli;
 
 /**
  * Class PasswordReader
  *
  * read password from stdin
  *
- * @package jr\ooapi
+ * @package jr\ooapi\cli
  */
 
 class PasswordReader

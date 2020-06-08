@@ -2,6 +2,7 @@
 <?php
 
 namespace jr\ooapi;
+use jr\ooapi\cli\PasswordReader;
 
 include(__DIR__.'/../vendor/autoload.php');
 
