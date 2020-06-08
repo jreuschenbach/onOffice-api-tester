@@ -1,6 +1,7 @@
 <?php
 
 namespace jr\ooapi;
+use jr\ooapi\api\JsonParseException;
 
 include(__DIR__.'/../vendor/autoload.php');
 

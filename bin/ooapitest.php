@@ -3,6 +3,7 @@
 
 namespace jr\ooapi;
 use jr\ooapi\cli\PasswordReader;
+use jr\ooapi\api\JsonParseException;
 
 include(__DIR__.'/../vendor/autoload.php');
 
@@ -27,7 +28,7 @@ if ($jsonString === null)
 {
     echo '# missing source / usage:'.PHP_EOL
         .'# php ooapitest.php -f file (file must exist!)'.PHP_EOL
-        .'# php ooapitest.php -s json-strong'.PHP_EOL
+        .'# php ooapitest.php -s json-string'.PHP_EOL
         .'# see Readme.md for details'.PHP_EOL.PHP_EOL;
     die();
 }

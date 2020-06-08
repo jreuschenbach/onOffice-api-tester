@@ -1,6 +1,6 @@
 <?php
 
-namespace jr\ooapi;
+namespace jr\ooapi\api;
 
 /**
  * Class JsonParseException

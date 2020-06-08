@@ -1,14 +1,14 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use jr\ooapi\Hmac;
+use jr\ooapi\api\Hmac;
 use jr\ooapi\dataObjects\RequestValues;
 use jr\ooapi\dataObjects\Credentials;
 use jr\ooapi\dataObjects\Resource;
 use jr\ooapi\dataObjects\Action;
 
 /**
- * @covers \jr\ooapi\Hmac
+ * @covers \jr\ooapi\api\Hmac
  * @uses \jr\ooapi\dataObjects\Resource
  * @uses \jr\ooapi\dataObjects\Action
  * @uses \jr\ooapi\dataObjects\Credentials

@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 use jr\ooapi\DataFactory;
 use jr\ooapi\dataObjects\Action;
 use jr\ooapi\dataObjects\Resource;
-use jr\ooapi\JsonParseException;
+use jr\ooapi\api\JsonParseException;
 
 /**
  * @covers \jr\ooapi\DataFactory

@@ -1,14 +1,14 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use jr\ooapi\ApiRequestJson;
+use jr\ooapi\api\ApiRequestJson;
 use jr\ooapi\dataObjects\Credentials;
 use jr\ooapi\dataObjects\Resource;
 use jr\ooapi\dataObjects\Action;
 use jr\ooapi\dataObjects\RequestValues;
 
 /**
- * @covers \jr\ooapi\ApiRequestJson
+ * @covers \jr\ooapi\api\ApiRequestJson
  * @uses \jr\ooapi\dataObjects\Credentials
  * @uses \jr\ooapi\dataObjects\Action
  * @uses \jr\ooapi\dataObjects\RequestValues

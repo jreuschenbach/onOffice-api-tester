@@ -2,15 +2,15 @@
 
 use PHPUnit\Framework\TestCase;
 use jr\ooapi\Config;
-use jr\ooapi\ApiRequest;
-use jr\ooapi\ApiResponse;
+use jr\ooapi\api\ApiRequest;
+use jr\ooapi\api\ApiResponse;
 use jr\ooapi\dataObjects\RequestValues;
 use jr\ooapi\dataObjects\Credentials;
 use jr\ooapi\dataObjects\Resource;
 use jr\ooapi\dataObjects\Action;
 
 /**
- * @covers \jr\ooapi\ApiRequest
+ * @covers \jr\ooapi\api\ApiRequest
  * @uses \jr\ooapi\Config
  * @uses \jr\ooapi\dataObjects\Credentials
  * @uses \jr\ooapi\dataObjects\Action

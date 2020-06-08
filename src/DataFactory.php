@@ -3,6 +3,7 @@
 namespace jr\ooapi;
 use jr\ooapi\dataObjects\Action;
 use jr\ooapi\dataObjects\Resource;
+use jr\ooapi\api\JsonParseException;
 
 /**
  * Class DataFactory

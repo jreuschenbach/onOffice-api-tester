@@ -2,6 +2,8 @@
 
 namespace jr\ooapi;
 use jr\ooapi\dataObjects\RequestValues;
+use jr\ooapi\api\ApiRequest;
+use jr\ooapi\api\ApiResponse;
 
 class OnOfficeApiTester
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace jr\ooapi;
+namespace jr\ooapi\api;
 use Symfony\Component\HttpClient\NativeHttpClient;
 use jr\ooapi\dataObjects\RequestValues;
 
