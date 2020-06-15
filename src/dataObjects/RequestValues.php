@@ -27,11 +27,11 @@ class RequestValues
     /** @var Action */
     private $action = null;
 
-    public function __construct(Credentials $credentials, Resource $resource, Action $action, array $parameters, int $timestamp)
+    public function __construct(Credentials $credentials, Request $request, int $timestamp)
     {
-        $this->resource = $resource;
-        $this->action = $action;
-        $this->parameters = $parameters;
+        $this->resource = $request->getResource();
+        $this->action = $request->getAction();
+        $this->parameters = $request->getParameters();
         $this->timestamp = $timestamp;
         $this->credentials = $credentials;
     }

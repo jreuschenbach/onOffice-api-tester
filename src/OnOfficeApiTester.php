@@ -5,6 +5,14 @@ use jr\ooapi\dataObjects\RequestValues;
 use jr\ooapi\api\ApiRequest;
 use jr\ooapi\api\ApiResponse;
 
+/**
+ * Class OnOfficeApiTester
+ *
+ * main-class / "business logic"
+ *
+ * @package jr\ooapi
+ */
+
 class OnOfficeApiTester
 {
     public function send($jsonString, $password): ApiResponse
@@ -17,10 +25,7 @@ class OnOfficeApiTester
 
         $dataFactory = new DataFactory();
         $request = $dataFactory->createRequestFromString($jsonString);
-        $resource = $request->getResource();
-        $action = $request->getAction();
-        $parameters = $request->getParameters();
-        $requestValues = new RequestValues($credentials, $resource, $action, $parameters, time());
+        $requestValues = new RequestValues($credentials, $request, time());
 
         $apiRequest = new ApiRequest($config->getApiUrl());
         return $apiRequest->send($requestValues);

@@ -8,6 +8,7 @@ use jr\ooapi\dataObjects\RequestValues;
 use jr\ooapi\dataObjects\Credentials;
 use jr\ooapi\dataObjects\Resource;
 use jr\ooapi\dataObjects\Action;
+use jr\ooapi\dataObjects\Request;
 
 /**
  * @covers \jr\ooapi\api\ApiRequest
@@ -19,6 +20,7 @@ use jr\ooapi\dataObjects\Action;
  * @uses \jr\ooapi\Hmac
  * @uses \jr\ooapi\ApiResponse
  * @uses \jr\ooapi\ApiRequestJson
+ * @uses \jr\ooapi\dataObjects\Request
  */
 
 class ApiRequestTest extends TestCase
@@ -30,7 +32,8 @@ class ApiRequestTest extends TestCase
         $credentials = new Credentials('token', 'secret');
         $resource = new Resource(1, 'address');
         $action = new Action('read');
-        $requestValues = new RequestValues($credentials, $resource, $action, [], 0);
+        $request = new Request($action, $resource, []);
+        $requestValues = new RequestValues($credentials, $request, 0);
 
         $apiResponse = $apiRequest->send($requestValues);
         $this->assertInstanceOf(ApiResponse::class, $apiResponse);

@@ -6,6 +6,7 @@ use jr\ooapi\dataObjects\RequestValues;
 use jr\ooapi\dataObjects\Credentials;
 use jr\ooapi\dataObjects\Resource;
 use jr\ooapi\dataObjects\Action;
+use jr\ooapi\dataObjects\Request;
 
 /**
  * @covers \jr\ooapi\api\Hmac
@@ -13,6 +14,7 @@ use jr\ooapi\dataObjects\Action;
  * @uses \jr\ooapi\dataObjects\Action
  * @uses \jr\ooapi\dataObjects\Credentials
  * @uses \jr\ooapi\dataObjects\RequestValues
+ * @uses \jr\ooapi\dataObjects\Request
  */
 
 class HmacTest extends TestCase
@@ -23,7 +25,8 @@ class HmacTest extends TestCase
         $resource = new Resource('1', 'type');
         $action = new Action('action', 'identifier');
         $parameters = ['paramKey' => 'paramValue'];
-        $requestValues = new RequestValues($credentials, $resource, $action, $parameters, 100);
+        $request = new Request($action, $resource, $parameters);
+        $requestValues = new RequestValues($credentials, $request, 100);
         $hmac = new Hmac();
 
         $this->assertEquals('7e0bb4b6ceb4b3cff609524e416f2ac3', $hmac->create($requestValues));
