@@ -4,6 +4,7 @@ namespace jr\ooapi;
 use jr\ooapi\dataObjects\Action;
 use jr\ooapi\dataObjects\Resource;
 use jr\ooapi\api\JsonParseException;
+use jr\ooapi\dataObjects\Request;
 
 /**
  * Class DataFactory
@@ -15,21 +16,27 @@ use jr\ooapi\api\JsonParseException;
 
 class DataFactory
 {
-    public function createActionFromString($jsonString): Action
+    public function createRequestFromString($jsonString): Request
     {
         $json = $this->parseJsonString($jsonString);
+        $action = $this->createAction($json);
+        $resource = $this->createResource($json);
+        $parameters = $this->createParameters($json);
+        return new Request($action, $resource, $parameters);
+    }
+
+    private function createAction($json): Action
+    {
         return new Action($json->actionid);
     }
 
-    public function createResourceFromString($jsonString): Resource
+    private function createResource($json): Resource
     {
-        $json = $this->parseJsonString($jsonString);
         return new Resource($json->resourceid, $json->resourcetype);
     }
 
-    public function createParametersFromString($jsonString): array
+    private function createParameters($json): array
     {
-        $json = $this->parseJsonString($jsonString);
         return (array) $json->parameters;
     }
 

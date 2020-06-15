@@ -16,10 +16,10 @@ class OnOfficeApiTester
         $credentials = $credentialStorage->load();
 
         $dataFactory = new DataFactory();
-        $resource = $dataFactory->createResourceFromString($jsonString);
-        $action = $dataFactory->createActionFromString($jsonString);
-        $parameters = $dataFactory->createParametersFromString($jsonString);
-
+        $request = $dataFactory->createRequestFromString($jsonString);
+        $resource = $request->getResource();
+        $action = $request->getAction();
+        $parameters = $request->getParameters();
         $requestValues = new RequestValues($credentials, $resource, $action, $parameters, time());
 
         $apiRequest = new ApiRequest($config->getApiUrl());
