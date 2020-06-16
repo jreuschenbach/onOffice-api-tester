@@ -1,7 +1,7 @@
 <?php
 
 namespace jr\ooapi;
-use jr\ooapi\dataObjects\RequestValues;
+use jr\ooapi\dataObjects\RequestWithAuthInfos;
 use jr\ooapi\api\ApiRequest;
 use jr\ooapi\api\ApiResponse;
 
@@ -33,7 +33,7 @@ class OnOfficeApiTester
 
         $dataFactory = new DataFactory();
         $request = $dataFactory->createRequestFromString($jsonString);
-        $requestValues = new RequestValues($credentials, $request, time());
+        $requestValues = new RequestWithAuthInfos($credentials, $request, time());
 
         return $this->apiRequest->send($config->getApiUrl(), $requestValues);
     }

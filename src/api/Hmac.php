@@ -1,7 +1,7 @@
 <?php
 
 namespace jr\ooapi\api;
-use jr\ooapi\dataObjects\RequestValues;
+use jr\ooapi\dataObjects\RequestWithAuthInfos;
 
 /**
  * Class Hmac
@@ -14,7 +14,7 @@ use jr\ooapi\dataObjects\RequestValues;
 
 class Hmac
 {
-    public function create(RequestValues $requestValues): string
+    public function create(RequestWithAuthInfos $requestValues): string
     {
         $fields['accesstoken'] = $requestValues->getCredentials()->getToken();
         $fields['actionid'] = $requestValues->getAction()->getId();

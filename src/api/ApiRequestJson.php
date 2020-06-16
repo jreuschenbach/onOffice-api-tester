@@ -1,7 +1,7 @@
 <?php
 
 namespace jr\ooapi\api;
-use jr\ooapi\dataObjects\RequestValues;
+use jr\ooapi\dataObjects\RequestWithAuthInfos;
 
 /**
  * Class ApiRequestJson
@@ -13,7 +13,7 @@ use jr\ooapi\dataObjects\RequestValues;
 
 class ApiRequestJson
 {
-    public function build(RequestValues $requestValues, string $hmac): string
+    public function build(RequestWithAuthInfos $requestValues, string $hmac): string
     {
         $json = new \stdClass();
         $json->token = $requestValues->getCredentials()->getToken();
@@ -29,7 +29,7 @@ class ApiRequestJson
         return json_encode($json);
     }
 
-    private function buildAction(RequestValues $requestValues, string $hmac): \stdClass
+    private function buildAction(RequestWithAuthInfos $requestValues, string $hmac): \stdClass
     {
         $action = new \stdClass();
         $action->actionid = $requestValues->getAction()->getId();

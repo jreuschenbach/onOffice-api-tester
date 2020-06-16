@@ -10,7 +10,7 @@ namespace jr\ooapi\dataObjects;
  * @package jr\ooapi\dataObjects
  */
 
-class RequestValues
+class RequestWithAuthInfos
 {
     /** @var Credentials */
     private $credentials = null;

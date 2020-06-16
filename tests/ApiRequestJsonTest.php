@@ -5,14 +5,14 @@ use jr\ooapi\api\ApiRequestJson;
 use jr\ooapi\dataObjects\Credentials;
 use jr\ooapi\dataObjects\Resource;
 use jr\ooapi\dataObjects\Action;
-use jr\ooapi\dataObjects\RequestValues;
+use jr\ooapi\dataObjects\RequestWithAuthInfos;
 use jr\ooapi\dataObjects\Request;
 
 /**
  * @covers \jr\ooapi\api\ApiRequestJson
  * @uses \jr\ooapi\dataObjects\Credentials
  * @uses \jr\ooapi\dataObjects\Action
- * @uses \jr\ooapi\dataObjects\RequestValues
+ * @uses \jr\ooapi\dataObjects\RequestWithAuthInfos
  * @uses \jr\ooapi\dataObjects\Resource
  * @uses \jr\ooapi\dataObjects\Request
  */
@@ -26,7 +26,7 @@ class ApiRequestJsonTest extends TestCase
         $action = new Action('read', 'identifier');
         $parameters = ['paramKey' => 'paramValue'];
         $request = new Request($action, $resource, $parameters);
-        $requestValues = new RequestValues($credentials, $request, 0);
+        $requestValues = new RequestWithAuthInfos($credentials, $request, 0);
         $hmac = 'hmac-test';
 
         $requestJson = new ApiRequestJson();

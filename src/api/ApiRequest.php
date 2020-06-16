@@ -2,7 +2,7 @@
 
 namespace jr\ooapi\api;
 use Symfony\Component\HttpClient\NativeHttpClient;
-use jr\ooapi\dataObjects\RequestValues;
+use jr\ooapi\dataObjects\RequestWithAuthInfos;
 
 /**
  * Class ApiRequest
@@ -14,7 +14,7 @@ use jr\ooapi\dataObjects\RequestValues;
 
 class ApiRequest
 {
-    public function send(string $apiUrl, RequestValues $requestValues): ApiResponse
+    public function send(string $apiUrl, RequestWithAuthInfos $requestValues): ApiResponse
     {
         $httpClient = new NativeHttpClient();
         $apiRequestJson = new ApiRequestJson();

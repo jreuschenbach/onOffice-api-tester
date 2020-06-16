@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 use jr\ooapi\Config;
 use jr\ooapi\api\ApiRequest;
 use jr\ooapi\api\ApiResponse;
-use jr\ooapi\dataObjects\RequestValues;
+use jr\ooapi\dataObjects\RequestWithAuthInfos;
 use jr\ooapi\dataObjects\Credentials;
 use jr\ooapi\dataObjects\Resource;
 use jr\ooapi\dataObjects\Action;
@@ -16,7 +16,7 @@ use jr\ooapi\dataObjects\Request;
  * @uses \jr\ooapi\dataObjects\Credentials
  * @uses \jr\ooapi\dataObjects\Action
  * @uses \jr\ooapi\dataObjects\Resource
- * @uses \jr\ooapi\dataObjects\RequestValues
+ * @uses \jr\ooapi\dataObjects\RequestWithAuthInfos
  * @uses \jr\ooapi\Hmac
  * @uses \jr\ooapi\ApiResponse
  * @uses \jr\ooapi\ApiRequestJson
@@ -33,7 +33,7 @@ class ApiRequestTest extends TestCase
         $resource = new Resource(1, 'address');
         $action = new Action('read');
         $request = new Request($action, $resource, []);
-        $requestValues = new RequestValues($credentials, $request, 0);
+        $requestValues = new RequestWithAuthInfos($credentials, $request, 0);
 
         $apiResponse = $apiRequest->send($config->getApiUrl(), $requestValues);
         $this->assertInstanceOf(ApiResponse::class, $apiResponse);
