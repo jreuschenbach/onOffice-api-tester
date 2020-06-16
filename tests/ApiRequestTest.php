@@ -28,14 +28,14 @@ class ApiRequestTest extends TestCase
     public function testRequest(): void
     {
         $config = new Config('config/ooapi.ini');
-        $apiRequest = new ApiRequest($config->getApiUrl());
+        $apiRequest = new ApiRequest();
         $credentials = new Credentials('token', 'secret');
         $resource = new Resource(1, 'address');
         $action = new Action('read');
         $request = new Request($action, $resource, []);
         $requestValues = new RequestValues($credentials, $request, 0);
 
-        $apiResponse = $apiRequest->send($requestValues);
+        $apiResponse = $apiRequest->send($config->getApiUrl(), $requestValues);
         $this->assertInstanceOf(ApiResponse::class, $apiResponse);
         $this->assertEquals(400, $apiResponse->getCode());
     }

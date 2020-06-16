@@ -27,7 +27,7 @@ class OnOfficeApiTester
         $request = $dataFactory->createRequestFromString($jsonString);
         $requestValues = new RequestValues($credentials, $request, time());
 
-        $apiRequest = new ApiRequest($config->getApiUrl());
-        return $apiRequest->send($requestValues);
+        $apiRequest = new ApiRequest();
+        return $apiRequest->send($config->getApiUrl(), $requestValues);
     }
 }
