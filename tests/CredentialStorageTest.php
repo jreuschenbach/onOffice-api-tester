@@ -41,9 +41,9 @@ class CredentialStorageTest extends TestCase
     public function testSave(): void
     {
         $credentials = $this->createCredentials();
-        $storage = new CredentialStorage($this->testDir);
+        $storage = new CredentialStorage();
         $storage->activateEncryption(new EncrypterOpenSSL(self::PASSWORD));
-        $storage->save($credentials);
+        $storage->save($this->testDir, $credentials);
 
         $fileContentEncrypted = file_get_contents($this->testDir);
 
@@ -55,10 +55,10 @@ class CredentialStorageTest extends TestCase
     public function testLoad(): void
     {
         $credentials = $this->createCredentials();
-        $storage = new CredentialStorage($this->testDir);
+        $storage = new CredentialStorage();
         $storage->activateEncryption(new EncrypterOpenSSL(self::PASSWORD));
-        $storage->save($credentials);
-        $credentials = $storage->load();
+        $storage->save($this->testDir, $credentials);
+        $credentials = $storage->load($this->testDir);
 
         $this->assertEquals('testToken', $credentials->getToken());
         $this->assertEquals('testSecret', $credentials->getSecret());
@@ -66,40 +66,40 @@ class CredentialStorageTest extends TestCase
 
     public function testFailedLoading(): void
     {
-        $storage = new CredentialStorage($this->testDir);
+        $storage = new CredentialStorage();
 
         $this->expectException('jr\ooapi\MissingCredentialFileException');
-        $storage->load();
+        $storage->load($this->testDir);
     }
 
     public function testWrongPassword(): void
     {
         $credentials = $this->createCredentials();
-        $storageWrite = new CredentialStorage($this->testDir);
+        $storageWrite = new CredentialStorage();
         $storageWrite->activateEncryption(new EncrypterOpenSSL('password'));
-        $storageWrite->save($credentials);
+        $storageWrite->save($this->testDir, $credentials);
 
-        $storageRead = new CredentialStorage($this->testDir);
+        $storageRead = new CredentialStorage();
         $storageRead->activateEncryption(new EncrypterOpenSSL('anotherPassword'));
         $this->expectException('jr\ooapi\DecryptCredentialsException');
-        $storageRead->load();
+        $storageRead->load($this->testDir);
     }
 
     public function testCredentialsStored(): void
     {
-        $storage = new CredentialStorage($this->testDir);
-        $this->assertFalse($storage->isSomethingStored());
-        $storage->save($this->createCredentials());
-        $this->assertTrue($storage->isSomethingStored());
+        $storage = new CredentialStorage();
+        $this->assertFalse($storage->isSomethingStored($this->testDir));
+        $storage->save($this->testDir, $this->createCredentials());
+        $this->assertTrue($storage->isSomethingStored($this->testDir));
     }
 
     public function testDeleteCredentials(): void
     {
-        $storage = new CredentialStorage($this->testDir);
-        $storage->save($this->createCredentials());
-        $this->assertTrue($storage->isSomethingStored());
-        $storage->delete();
-        $this->assertFalse($storage->isSomethingStored());
+        $storage = new CredentialStorage();
+        $storage->save($this->testDir, $this->createCredentials());
+        $this->assertTrue($storage->isSomethingStored($this->testDir));
+        $storage->delete($this->testDir);
+        $this->assertFalse($storage->isSomethingStored($this->testDir));
     }
 
     private function createCredentials(): Credentials

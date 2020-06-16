@@ -17,9 +17,9 @@ try
     {
         $credentials = new Credentials($token, $secret);
         $config = new Config();
-        $credentialStorage = new CredentialStorage($config->getCredentialDir());
+        $credentialStorage = new CredentialStorage();
         $credentialStorage->activateEncryption(new EncrypterOpenSSL($password));
-        $credentialStorage->save($credentials);
+        $credentialStorage->save($config->getCredentialDir(), $credentials);
 
         $message = 'api-credentials stored encrypted...';
     }

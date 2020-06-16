@@ -18,42 +18,35 @@ class CredentialStorage
     const INDEX_SECRET = 1;
     const SEPARATOR = ':';
 
-    /** @var string */
-    private $baseDir = '';
-
     /** @var Encrypter */
     private $encrypter = null;
 
-    public function __construct($baseDir)
-    {
-        $this->baseDir = $baseDir;
-    }
 
-    public function save(Credentials $credentials): void
+    public function save($baseDir, Credentials $credentials): void
     {
         $content = $credentials->getToken().self::SEPARATOR.$credentials->getSecret();
-        $this->writeFile($content);
+        $this->writeFile($baseDir, $content);
     }
 
-    public function load(): Credentials
+    public function load($baseDir): Credentials
     {
-        $credentialString = $this->loadFile();
+        $credentialString = $this->loadFile($baseDir);
         $fileElements = explode(self::SEPARATOR, $credentialString);
 
         return new Credentials($fileElements[self::INDEX_TOKEN], $fileElements[self::INDEX_SECRET]);
     }
 
-    public function delete(): void
+    public function delete($baseDir): void
     {
-        if ($this->isSomethingStored())
+        if ($this->isSomethingStored($baseDir))
         {
-            unlink($this->pathCredentialFile());
+            unlink($this->pathCredentialFile($baseDir));
         }
     }
 
-    public function isSomethingStored(): bool
+    public function isSomethingStored($baseDir): bool
     {
-        return file_exists($this->pathCredentialFile());
+        return file_exists($this->pathCredentialFile($baseDir));
     }
 
     public function activateEncryption(Encrypter $encrypter): void
@@ -61,7 +54,7 @@ class CredentialStorage
         $this->encrypter = $encrypter;
     }
 
-    private function writeFile($credentialString): void
+    private function writeFile($baseDir, $credentialString): void
     {
         $fileContent = $credentialString;
 
@@ -70,17 +63,17 @@ class CredentialStorage
             $fileContent = $this->encrypter->encrypt($fileContent);
         }
 
-        file_put_contents($this->pathCredentialFile(), $fileContent);
+        file_put_contents($this->pathCredentialFile($baseDir), $fileContent);
     }
 
-    private function loadFile(): string
+    private function loadFile($baseDir): string
     {
-        if (!file_exists($this->pathCredentialFile()))
+        if (!file_exists($this->pathCredentialFile($baseDir)))
         {
             throw new MissingCredentialFileException('missing file');
         }
 
-        $fileContent = file_get_contents($this->pathCredentialFile());
+        $fileContent = file_get_contents($this->pathCredentialFile($baseDir));
 
         if ($this->isEncryptionEnabled())
         {
@@ -100,8 +93,8 @@ class CredentialStorage
         return $this->encrypter instanceof Encrypter;
     }
 
-    private function pathCredentialFile()
+    private function pathCredentialFile($baseDir)
     {
-        return $this->baseDir.'/ooapi_credentials';
+        return $baseDir.'/ooapi_credentials';
     }
 }

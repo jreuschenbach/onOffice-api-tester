@@ -19,9 +19,9 @@ class OnOfficeApiTester
     {
         $config = new Config();
 
-        $credentialStorage = new CredentialStorage($config->getCredentialDir());
+        $credentialStorage = new CredentialStorage();
         $credentialStorage->activateEncryption(new EncrypterOpenSSL($password));
-        $credentials = $credentialStorage->load();
+        $credentials = $credentialStorage->load($config->getCredentialDir());
 
         $dataFactory = new DataFactory();
         $request = $dataFactory->createRequestFromString($jsonString);
