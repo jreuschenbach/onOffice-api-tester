@@ -17,7 +17,7 @@ class OnOfficeApiTester
 {
     public function send($jsonString, $password): ApiResponse
     {
-        $config = new Config(__DIR__.'/../config/ooapi.ini');
+        $config = new Config();
 
         $credentialStorage = new CredentialStorage($config->getCredentialDir());
         $credentialStorage->activateEncryption(new EncrypterOpenSSL($password));

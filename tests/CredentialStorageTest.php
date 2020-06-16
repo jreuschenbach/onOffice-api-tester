@@ -22,7 +22,7 @@ class CredentialStorageTest extends TestCase
 
     protected function setUp(): void
     {
-        $config = new Config('config/ooapi.ini');
+        $config = new Config();
         $this->testDir = $config->getCredentialDir().'/test-ooapi-'.rand(0, 1000000000);
 
         mkdir($this->testDir);

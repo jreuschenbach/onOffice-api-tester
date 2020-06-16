@@ -17,9 +17,9 @@ class Config
 {
     private $config = [];
 
-    public function __construct($iniFile)
+    public function __construct()
     {
-        $this->config = parse_ini_file($iniFile);
+        $this->config = parse_ini_file(__DIR__.'/../config/ooapi.ini');
     }
 
     public function getApiUrl(): string

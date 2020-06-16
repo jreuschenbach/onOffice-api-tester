@@ -4,7 +4,7 @@ namespace jr\ooapi;
 
 include(__DIR__.'/../vendor/autoload.php');
 
-$config = new Config(__DIR__ . '/../config/ooapi.ini');
+$config = new Config();
 $credentialStorage = new CredentialStorage($config->getCredentialDir());
 
 echo $credentialStorage->isSomethingStored();
