@@ -15,25 +15,17 @@ class RequestWithAuthInfos
     /** @var Credentials */
     private $credentials = null;
 
-    /** @var Resource */
-    private $resource = null;
-
     /** @var int */
     private $timestamp = 0;
 
-    /** @var array */
-    private $parameters = [];
-
-    /** @var Action */
-    private $action = null;
+    /** @var Request */
+    private $request = null;
 
     public function __construct(Credentials $credentials, Request $request, int $timestamp)
     {
-        $this->resource = $request->getResource();
-        $this->action = $request->getAction();
-        $this->parameters = $request->getParameters();
         $this->timestamp = $timestamp;
         $this->credentials = $credentials;
+        $this->request = $request;
     }
 
     public function getCredentials(): Credentials
@@ -48,16 +40,16 @@ class RequestWithAuthInfos
 
     public function getParameters(): array
     {
-        return $this->parameters;
+        return $this->request->getParameters();
     }
 
     public function getAction(): Action
     {
-        return $this->action;
+        return $this->request->getAction();
     }
 
     public function getResource(): Resource
     {
-        return $this->resource;
+        return $this->request->getResource();
     }
 }
