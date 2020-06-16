@@ -2,6 +2,7 @@
 <?php
 
 namespace jr\ooapi;
+use jr\ooapi\api\ApiRequest;
 use jr\ooapi\cli\PasswordReader;
 use jr\ooapi\api\JsonParseException;
 
@@ -38,7 +39,7 @@ try
     $passwordReader = new PasswordReader();
     $password = $passwordReader->read('Password (to reload stored credentials)');
 
-    $apiTester = new OnOfficeApiTester();
+    $apiTester = new OnOfficeApiTester(new CredentialStorage(), new ApiRequest());
     $apiResponse = $apiTester->send($jsonString, $password);
 
     echo 'answer from onOffice API:'.PHP_EOL

@@ -2,6 +2,9 @@
 
 use PHPUnit\Framework\TestCase;
 use jr\ooapi\OnOfficeApiTester;
+use jr\ooapi\api\ApiResponse;
+use jr\ooapi\CredentialStorage;
+use jr\ooapi\api\ApiRequest;
 
 class OnOfficeApiTesterTest extends TestCase
 {
@@ -10,9 +13,11 @@ class OnOfficeApiTesterTest extends TestCase
 
     public function testSend()
     {
-        $tester = new OnOfficeApiTester();
-        $this->assertTrue(true);
-        //$apiResponse = $tester->send(self::JSON, self::PASSWORD);
-        //$this->assertInstanceOf(ApiResponse::class, $apiResponse);
+        $credentialStorage = $this->createMock(CredentialStorage::class);
+        $apiRequest = $this->createMock(ApiRequest::class);
+
+        $tester = new OnOfficeApiTester($credentialStorage, $apiRequest);
+        $apiResponse = $tester->send(self::JSON, self::PASSWORD);
+        $this->assertInstanceOf(ApiResponse::class, $apiResponse);
     }
 }

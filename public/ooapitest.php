@@ -1,6 +1,7 @@
 <?php
 
 namespace jr\ooapi;
+use jr\ooapi\api\ApiRequest;
 use jr\ooapi\api\JsonParseException;
 
 include(__DIR__.'/../vendor/autoload.php');
@@ -16,7 +17,7 @@ try
         throw new \Exception('missing password');
     }
 
-    $apiTester = new OnOfficeApiTester();
+    $apiTester = new OnOfficeApiTester(new CredentialStorage(), new ApiRequest());
     $apiResponse = $apiTester->send($jsonString, $password);
 
     $message = 'answer from onOffice API:'.PHP_EOL
