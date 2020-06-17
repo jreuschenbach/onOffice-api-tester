@@ -3,7 +3,7 @@
 
 namespace jr\ooapi;
 use jr\ooapi\api\ApiRequest;
-use jr\ooapi\cli\PasswordReader;
+use jr\ooapi\dataObjects\Credentials;
 use jr\ooapi\api\JsonParseException;
 use jr\ooapi\cli\CliArguments;
 
@@ -12,7 +12,9 @@ include(__DIR__.'/../vendor/autoload.php');
 $jsonString = null;
 
 $cliArguments = new CliArguments();
-$jsonFile = $cliArguments->getByFlag('-f');
+$jsonFile = $cliArguments->getByFlag('-f', $argv);
+$token = $cliArguments->getByFlag('-t', $argv);
+$secret = $cliArguments->getByFlag('-s', $argv);
 
 if ($jsonFile !== null)
 {
@@ -20,30 +22,22 @@ if ($jsonFile !== null)
 }
 else
 {
-    $jsonString = $cliArguments->getByFlag('-j');
+    $jsonString = $cliArguments->getByFlag('-j', $argv);
 }
 
-if ($jsonString === null)
+if ($jsonString === null || $token === null || $secret === null)
 {
-    echo '# missing source / usage:'.PHP_EOL
-        .'# php ooapitest.php -f file (file must exist!)'.PHP_EOL
-        .'# php ooapitest.php -s json-string'.PHP_EOL
+    echo '# missing source, token or secret / usage:'.PHP_EOL
+        .'# php ooapitest.php -f file (file must exist!) -t token -s secret'.PHP_EOL
+        .'# php ooapitest.php -j json-string -t token -s secret'.PHP_EOL
         .'# see Readme.md for details'.PHP_EOL.PHP_EOL;
     die();
 }
 
 try
 {
-    $passwordReader = new PasswordReader();
-    $password = $passwordReader->read('Password (to reload stored credentials)');
-
-    $config = new Config();
-
-    $credentialStorage = new CredentialStorage();
-    $credentialStorage->activateEncryption(new EncrypterOpenSSL($password));
-    $credentials = $credentialStorage->load($config->getCredentialDir());
-
-    $apiTester = new OnOfficeApiTester($credentials, new ApiRequest());
+    $credentials = new Credentials($token, $secret);
+    $apiTester = new OnOfficeApiTester(new ApiRequest());
     $apiResponse = $apiTester->send($jsonString, $credentials);
 
     echo 'answer from onOffice API:'.PHP_EOL
