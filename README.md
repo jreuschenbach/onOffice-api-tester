@@ -13,7 +13,6 @@ composer install --no-dev #op-mode
 # ooapi.ini
 In config/ooapi.ini you can:
 * select the onOffice-API-URL
-* select the directory to store the credentials (encrypted)
 
 ## gui
 * call public/index.html in browser
