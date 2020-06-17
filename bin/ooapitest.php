@@ -9,11 +9,13 @@ use jr\ooapi\api\JsonParseException;
 include(__DIR__.'/../vendor/autoload.php');
 
 $jsonString = null;
-
+var_dump($argv);die();
 if (count($argv) == 3)
 {
     $flag = $argv[1];
     $source = $argv[2];
+
+
 
     if ($flag == '-f' && file_exists($source))
     {
@@ -47,11 +49,6 @@ try
         .'Error-Code: '.$apiResponse->getErrorCode().PHP_EOL
         .'Message: '.$apiResponse->getMessage().PHP_EOL
         .'Results: '.json_encode($apiResponse->getResults()).PHP_EOL.PHP_EOL;
-}
-catch (MissingCredentialFileException $exception)
-{
-    echo 'missing credential-file / call credentials.php first'.PHP_EOL
-        .'see Readme.md for details'.PHP_EOL;
 }
 catch (DecryptCredentialsException $exception)
 {
