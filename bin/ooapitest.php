@@ -5,26 +5,22 @@ namespace jr\ooapi;
 use jr\ooapi\api\ApiRequest;
 use jr\ooapi\cli\PasswordReader;
 use jr\ooapi\api\JsonParseException;
+use jr\ooapi\cli\CliArguments;
 
 include(__DIR__.'/../vendor/autoload.php');
 
 $jsonString = null;
-var_dump($argv);die();
-if (count($argv) == 3)
+
+$cliArguments = new CliArguments();
+$jsonFile = $cliArguments->getByFlag('-f');
+
+if ($jsonFile !== null)
 {
-    $flag = $argv[1];
-    $source = $argv[2];
-
-
-
-    if ($flag == '-f' && file_exists($source))
-    {
-        $jsonString = file_get_contents($source);
-    }
-    elseif ($flag == '-s')
-    {
-        $jsonString = $source;
-    }
+    $jsonString = file_get_contents($jsonFile);
+}
+else
+{
+    $jsonString = $cliArguments->getByFlag('-j');
 }
 
 if ($jsonString === null)
@@ -41,8 +37,14 @@ try
     $passwordReader = new PasswordReader();
     $password = $passwordReader->read('Password (to reload stored credentials)');
 
-    $apiTester = new OnOfficeApiTester(new CredentialStorage(), new ApiRequest());
-    $apiResponse = $apiTester->send($jsonString, $password);
+    $config = new Config();
+
+    $credentialStorage = new CredentialStorage();
+    $credentialStorage->activateEncryption(new EncrypterOpenSSL($password));
+    $credentials = $credentialStorage->load($config->getCredentialDir());
+
+    $apiTester = new OnOfficeApiTester($credentials, new ApiRequest());
+    $apiResponse = $apiTester->send($jsonString, $credentials);
 
     echo 'answer from onOffice API:'.PHP_EOL
         .'Status-Code: '.$apiResponse->getCode().PHP_EOL

@@ -4,6 +4,7 @@ namespace jr\ooapi;
 use jr\ooapi\dataObjects\RequestWithAuthInfos;
 use jr\ooapi\api\ApiRequest;
 use jr\ooapi\api\ApiResponse;
+use jr\ooapi\dataObjects\Credentials;
 
 /**
  * Class OnOfficeApiTester
@@ -15,21 +16,16 @@ use jr\ooapi\api\ApiResponse;
 
 class OnOfficeApiTester
 {
-    private $credentialStorage = null;
     private $apiRequest = null;
 
-    public function __construct(CredentialStorage $credentialStorage, ApiRequest $apiRequest)
+    public function __construct(ApiRequest $apiRequest)
     {
-        $this->credentialStorage = $credentialStorage;
         $this->apiRequest = $apiRequest;
     }
 
-    public function send($jsonString, $password): ApiResponse
+    public function send($jsonString, Credentials $credentials): ApiResponse
     {
         $config = new Config();
-
-        $this->credentialStorage->activateEncryption(new EncrypterOpenSSL($password));
-        $credentials = $this->credentialStorage->load($config->getCredentialDir());
 
         $dataFactory = new DataFactory();
         $request = $dataFactory->createRequestFromString($jsonString);

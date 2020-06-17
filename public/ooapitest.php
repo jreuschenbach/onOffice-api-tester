@@ -17,8 +17,13 @@ try
         throw new \Exception('missing password');
     }
 
-    $apiTester = new OnOfficeApiTester(new CredentialStorage(), new ApiRequest());
-    $apiResponse = $apiTester->send($jsonString, $password);
+    $config = new Config();
+    $credentialStorage = new CredentialStorage();
+    $credentialStorage->activateEncryption(new EncrypterOpenSSL($password));
+    $credentials = $credentialStorage->load($config->getCredentialDir());
+
+    $apiTester = new OnOfficeApiTester(new ApiRequest());
+    $apiResponse = $apiTester->send($jsonString, $credentials);
 
     $message = 'answer from onOffice API:'.PHP_EOL
         .'Status-Code: '.$apiResponse->getCode().PHP_EOL
