@@ -46,10 +46,6 @@ try
         .'Message: '.$apiResponse->getMessage().PHP_EOL
         .'Results: '.json_encode($apiResponse->getResults()).PHP_EOL.PHP_EOL;
 }
-catch (DecryptCredentialsException $exception)
-{
-    echo 'error while reading stored credentials / maybe wrong password to decrypt'.PHP_EOL;
-}
 catch (JsonParseException $exception)
 {
     echo 'json-parse-error / please make sure the given json-string is correct'.PHP_EOL

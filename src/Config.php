@@ -26,9 +26,4 @@ class Config
     {
         return $this->config['url'];
     }
-
-    public function getCredentialDir(): string
-    {
-        return $this->config['credential_dir'];
-    }
 }
