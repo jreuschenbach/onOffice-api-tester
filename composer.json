@@ -13,7 +13,6 @@
   "require": {
     "symfony/http-client": "^5",
     "ext-json": "*",
-    "ext-openssl": "*",
     "php": "^7.2.0"
   },
   "require-dev": {
