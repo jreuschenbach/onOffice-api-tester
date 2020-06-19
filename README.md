@@ -1,6 +1,14 @@
 # onOffice-api-tester
 test-suite for onOffice API
 
+**Table of Contents**
+* [Requirements](#requirements)
+* [Installation](#installation)
+* [ooapi.ini](#ooapiini)
+* [gui](#gui)
+* [Command-Line-Version](#Command-Line-Version)
+* [ooapitest.php](#ooapitestphp)
+
 # Requirements
 * PHP >= 7.2
 * Linux / OSX
